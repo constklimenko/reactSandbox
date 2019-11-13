@@ -10,7 +10,16 @@ var my_news = [{
 {
   author: 'Гость',
   text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000'
-}
+},
+  {
+    author: 'Дюбель',
+    text: 'Бум бум бум'
+  },
+
+  {
+    author: 'Барракуда',
+    text: 'Съем всех человеков'
+  },
 
 ];
 
@@ -48,7 +57,7 @@ class News extends React.Component {
       newsTemplate = data.map(
         function (item, index) {
           return (
-            < div key={index}>
+            < div className="news__item"  key={index}>
               < Article data={item} />
             </div>
           )
@@ -63,7 +72,7 @@ class News extends React.Component {
     return (
       <div className="news">
         {newsTemplate}
-        <strong className={data.length > 0 ? '' : 'none'} >Всего новостей: {data.length}</strong>
+        <strong className={data.length > 0 ? 'news__count' : 'none'} >Всего новостей: {data.length}</strong>
       </div>
     );
 
@@ -75,7 +84,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        Всем привет, я компонент App! Я умею отображать новости.
+        <h3>Новости</h3>
 <News data={my_news} />
         
       </div>
