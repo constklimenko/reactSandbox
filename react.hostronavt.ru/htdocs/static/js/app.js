@@ -49,6 +49,9 @@ class Article extends React.Component {
 }
 
 class News extends React.Component {
+  static propTypes() {
+    data: React.propTypes.array.isRequired
+  };
   render() {
     var data = this.props.data;
     var newsTemplate
@@ -79,6 +82,8 @@ class News extends React.Component {
 
   }
 }
+
+
 
 class App extends React.Component {
   render() {
