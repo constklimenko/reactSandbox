@@ -13,7 +13,7 @@ a:visited {
     /* text-decoration: none; */
 }
 
-a:after {
+.nav__link:after {
     display: block;
     content: "";
     height: 2px;
@@ -26,8 +26,8 @@ a:after {
     -o-transition: width .3s ease-in-out;
 }
 
-a:hover:after,
-a:focus:after {
+.nav__link:hover:after,
+.nav__link:focus:after {
     width: 100%;
 }
 
