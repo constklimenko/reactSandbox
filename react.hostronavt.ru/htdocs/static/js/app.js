@@ -69,7 +69,7 @@ class Article extends React.Component {
   render() {
     var item = this.props.data;
     var visible = this.state.visible;
-
+    console.log('render', this);
 
     return (<div className="article">
       <p className="news__author">{item.author}:</p>
@@ -104,6 +104,8 @@ class News extends React.Component {
   static propTypes() {
     data: React.propTypes.array.isRequired
   };
+
+ 
   render() {
     var data = this.props.data;
     var newsTemplate
@@ -133,19 +135,67 @@ class News extends React.Component {
 
 
   }
+
+  
+}
+
+class TestInput extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
+    this.changeValue=this.changeValue.bind(this);
+
+  };
+
+  changeValue(e){
+    this.setState({value: e.target.value})
+  }
+
+
+  
+  render() {
+    
+    return(
+      <p><input className='test-input' value={this.state.value} onChange={this.changeValue} placeholder="введите значение" /></p>
+      
+    )
+  }
 }
 
 
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0
+    }
+
+    this.counterPlus = this.counterPlus.bind(this)
+  }
+
   render() {
     return (
       <div className="app">
-        <h3>Новости</h3>
+        <h3>>Новости</h3>
+        <TestInput/>
 <News data={my_news} />
         
-      </div>
+      </div>   
     );
+  }
+
+  counterPlus(e) {
+    e.preventDefault();
+    this.setState(
+      {
+        counter: ++this.state.counter
+      }
+    )
+
   }
 }
 
