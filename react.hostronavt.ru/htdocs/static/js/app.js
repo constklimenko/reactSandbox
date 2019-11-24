@@ -59,7 +59,10 @@ class Article extends React.Component {
     this.state = {
       visible: false,
     };
+    this.readmoreClick = this.readmoreClick.bind(this);
   }
+
+  
 
   
   render() {
@@ -71,14 +74,19 @@ class Article extends React.Component {
       <p className="news__author">{item.author}:</p>
       <p className="news__text">{item.text}</p>
       <a href="#" className={'news__readmore ' + (visible ? 'none' : '')}
-      onClick={() => this.setState({
-        visible: true
-      })}
+      onClick={this.readmoreClick}
       >Подробнее</a>
       <p className={'news__big-text ' + (visible ? '' : 'none')}  >{item.bigText}</p>
       </div>
 
     );
+  };
+
+  readmoreClick(e){
+    e.preventDefault();
+    this.setState({
+      visible: true
+    });
   }
 }
 
