@@ -60,6 +60,7 @@ class Article extends React.Component {
       visible: false,
     };
     this.readmoreClick = this.readmoreClick.bind(this);
+    this.closeClick = this.closeClick.bind(this);
   }
 
   
@@ -73,11 +74,13 @@ class Article extends React.Component {
     return (<div className="article">
       <p className="news__author">{item.author}:</p>
       <p className="news__text">{item.text}</p>
-      <a href="#" className={'news__readmore ' + (visible ? 'none' : '')}
+      <a href="#" className={'news__readmore ' + (visible? 'none':'')}
       onClick={this.readmoreClick}
       >Подробнее</a>
-      <p className={'news__big-text ' + (visible ? '' : 'none')}  >{item.bigText}</p>
+      <p className={'news__big-text ' + (visible?'':'none')}  >{item.bigText}</p>
+      <a href="#" onClick={this.closeClick} className={'news__close ' + (visible ? '' : 'none')}>x</a>
       </div>
+      
 
     );
   };
@@ -86,6 +89,13 @@ class Article extends React.Component {
     e.preventDefault();
     this.setState({
       visible: true
+    });
+  }
+
+  closeClick(e) {
+    e.preventDefault();
+    this.setState({
+      visible: false
     });
   }
 }

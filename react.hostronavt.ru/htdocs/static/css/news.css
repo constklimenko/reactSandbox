@@ -23,10 +23,19 @@
 }
 
 .news__item {
+    position: relative;
     height: 100%;
     display: grid;
     align-items: stretch;
     justify-items: stretch;
+}
+
+.news__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .news__count {
