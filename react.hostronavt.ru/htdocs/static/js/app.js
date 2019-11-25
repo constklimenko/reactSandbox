@@ -139,18 +139,42 @@ class News extends React.Component {
   
 }
 
-class TestInput extends React.Component{
+class Add extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      agreeNotChecked:true,
+      authorIsEmpty: true,
+      textIsEmpty:true,
+      button_disabled: true
     };
     this.changeValue=this.changeValue.bind(this);
+    this.onBtnClick = this.onBtnClick.bind(this);
+    this.changeCheckbox = this.changeCheckbox.bind(this);
 
   };
 
   changeValue(e){
     this.setState({value: e.target.value})
+  };
+
+  onBtnClick(e){
+    // console.log(this.refs)
+    e.preventDefault();
+
+    var author = ReactDOM.findDOMNode(this.refs.author).value;
+    var text = ReactDOM.findDOMNode(this.refs.text).value;
+    alert(author + '\n' + text);
+  };
+
+  changeCheckbox(e){
+    this.setState({
+      button_disabled: !this.state.button_disabled
+    })
+  }
+
+  componentDidMount(){
+    ReactDOM.findDOMNode(this.refs.author).focus();
   }
 
 
@@ -158,7 +182,13 @@ class TestInput extends React.Component{
   render() {
     
     return(
-      <p><input className='test-input' value={this.state.value} onChange={this.changeValue} placeholder="введите значение" /></p>
+      <p><input className='test-input' ref='author' defaultValue="" placeholder="автор новости" /> <br/>
+        <textarea ref='text' cols="30" rows="10" placeholder="текст новости" defaultValue="" ></textarea>
+      <br/>
+        <label ><input type="checkbox" onChange={this.changeCheckbox} defaultChecked={false} name="" id="" ref='checkrule' /> Я согласен с
+правилами </label>
+         <button onClick={this.onBtnClick} ref='alert_button'  disabled={this.state.button_disabled}>окей </button>
+      </p>
       
     )
   }
@@ -180,8 +210,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <h3>>Новости</h3>
-        <TestInput/>
+        <Add />
+        <h3>Новости</h3>
+        
 <News data={my_news} />
         
       </div>   
