@@ -1,4 +1,7 @@
 
+
+window.ee = new EventEmitter()
+
 var my_news = [{
   author: 'Саша Печкин',
   text: 'В четчерг, четвертого числа...',
@@ -146,12 +149,12 @@ class Add extends React.Component{
       agreeNotChecked:true,
       authorIsEmpty: true,
       textIsEmpty:true,
-      // button_disabled: true
+      
     };
     this.changeValue=this.changeValue.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
     this.changeCheckbox = this.changeCheckbox.bind(this);
-    // this.buttonEnable = this.buttonEnable.bind(this);
+    
     this.changeAuthor = this.changeAuthor.bind(this);
     this.changeText = this.changeText.bind(this);
 
@@ -162,29 +165,23 @@ class Add extends React.Component{
   };
 
   onBtnClick(e){
-    // console.log(this.refs)
+    
     e.preventDefault();
 
     var author = ReactDOM.findDOMNode(this.refs.author).value;
     var text = ReactDOM.findDOMNode(this.refs.text).value;
-    alert(author + '\n' + text);
+    // alert(author + '\n' + text);
+
+    var item = [{
+      author: author,
+      text: text,
+      bigText: '...'
+    }];
+
+    window.ee.emit('News.add', item);
+    console.log('generate event')
   };
 
-  // buttonEnable(){
-
-  //   console.log()
-  //   if (!this.state.agreeNotChecked || this.state.textIsEmpty || this.state.authorIsEmpty) {
-  //     console.log('disabling button')
-  //     this.setState({
-  //       button_disabled: true
-  //     })
-  //   }
-  //   else {
-  //     this.setState({
-  //       button_disabled: false
-  //     })
-  //   }
-  // };
 
   changeCheckbox(e){
     
@@ -192,7 +189,7 @@ class Add extends React.Component{
       agreeNotChecked: !this.state.agreeNotChecked
     });
 
-    // this.buttonEnable();
+   
   };
 
   changeText(e){
@@ -207,7 +204,7 @@ class Add extends React.Component{
       });
     }
     
-    // this.buttonEnable();
+    
   };
 
   changeAuthor(e) {
@@ -222,12 +219,25 @@ class Add extends React.Component{
       });
     }
 
-   
-    // this.buttonEnable();
   }
 
   componentDidMount(){
     ReactDOM.findDOMNode(this.refs.author).focus();
+
+    var self = this;
+    window.ee.addListener('News.add',  (item) => {
+      console.log(item);
+      var nextNews = item;
+      //.concat(self.state.news);
+      self.setState({ news: nextNews });
+       console.log('adding news');
+       self.render()
+    });
+    console.log('adding listner')
+  }
+
+  componentWillUnmount(){
+    window.ee.removeListener('News.add');
   }
 
 
@@ -258,7 +268,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      counter: 0,
+      news: my_news,
     }
 
     this.counterPlus = this.counterPlus.bind(this)
@@ -270,7 +281,7 @@ class App extends React.Component {
         <Add />
         <h3>Новости</h3>
         
-<News data={my_news} />
+<News data={this.state.news} />
         
       </div>   
     );
