@@ -146,11 +146,14 @@ class Add extends React.Component{
       agreeNotChecked:true,
       authorIsEmpty: true,
       textIsEmpty:true,
-      button_disabled: true
+      // button_disabled: true
     };
     this.changeValue=this.changeValue.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
     this.changeCheckbox = this.changeCheckbox.bind(this);
+    // this.buttonEnable = this.buttonEnable.bind(this);
+    this.changeAuthor = this.changeAuthor.bind(this);
+    this.changeText = this.changeText.bind(this);
 
   };
 
@@ -167,10 +170,60 @@ class Add extends React.Component{
     alert(author + '\n' + text);
   };
 
+  // buttonEnable(){
+
+  //   console.log()
+  //   if (!this.state.agreeNotChecked || this.state.textIsEmpty || this.state.authorIsEmpty) {
+  //     console.log('disabling button')
+  //     this.setState({
+  //       button_disabled: true
+  //     })
+  //   }
+  //   else {
+  //     this.setState({
+  //       button_disabled: false
+  //     })
+  //   }
+  // };
+
   changeCheckbox(e){
+    
     this.setState({
-      button_disabled: !this.state.button_disabled
-    })
+      agreeNotChecked: !this.state.agreeNotChecked
+    });
+
+    // this.buttonEnable();
+  };
+
+  changeText(e){
+    let text = e.target.value.trim();
+    if(text){
+      this.setState({
+        textIsEmpty: false
+      });
+    }else{
+      this.setState({
+        textIsEmpty: true
+      });
+    }
+    
+    // this.buttonEnable();
+  };
+
+  changeAuthor(e) {
+    let text = e.target.value.trim();
+    if (text) {
+      this.setState({
+        authorIsEmpty: false
+      });
+    } else {
+      this.setState({
+        authorIsEmpty: true
+      });
+    }
+
+   
+    // this.buttonEnable();
   }
 
   componentDidMount(){
@@ -180,14 +233,18 @@ class Add extends React.Component{
 
   
   render() {
+
+    var agreeNotChecked = this.state.agreeNotChecked,
+      authorIsEmpty = this.state.authorIsEmpty,
+      textIsEmpty = this.state.textIsEmpty;
     
     return(
-      <p><input className='test-input' ref='author' defaultValue="" placeholder="автор новости" /> <br/>
-        <textarea ref='text' cols="30" rows="10" placeholder="текст новости" defaultValue="" ></textarea>
+      <p><input className='test-input' ref='author' defaultValue="" onChange={this.changeAuthor} placeholder="автор новости" /> <br/>
+        <textarea onChange={this.changeText} ref='text' cols="30" rows="10" placeholder="текст новости" defaultValue="" ></textarea>
       <br/>
         <label ><input type="checkbox" onChange={this.changeCheckbox} defaultChecked={false} name="" id="" ref='checkrule' /> Я согласен с
 правилами </label>
-         <button onClick={this.onBtnClick} ref='alert_button'  disabled={this.state.button_disabled}>окей </button>
+        <button onClick={this.onBtnClick} ref='alert_button' disabled={agreeNotChecked || authorIsEmpty || textIsEmpty}>окей </button>
       </p>
       
     )
