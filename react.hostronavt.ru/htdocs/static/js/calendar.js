@@ -109,7 +109,7 @@ class Calendar extends React.Component {
      month_2: 'Июнь'
     }
 
-    this.counterPlus = this.counterPlus.bind(this)
+    
   }
 
 
