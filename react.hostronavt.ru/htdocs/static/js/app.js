@@ -224,22 +224,10 @@ class Add extends React.Component{
   componentDidMount(){
     ReactDOM.findDOMNode(this.refs.author).focus();
 
-    var self = this;
-    window.ee.addListener('News.add',  (item) => {
-      console.log(item);
-      var nextNews = item;
-      //.concat(self.state.news);
-      self.setState({ news: nextNews });
-       console.log('adding news');
-       self.render()
-    });
-    console.log('adding listner')
+    
   }
 
-  componentWillUnmount(){
-    window.ee.removeListener('News.add');
-  }
-
+  
 
   
   render() {
@@ -274,6 +262,19 @@ class App extends React.Component {
 
     this.counterPlus = this.counterPlus.bind(this)
   }
+
+  componentDidMount() {
+  var self = this;
+
+  window.ee.addListener('News.add', function (item) {
+    var nextNews = item.concat(self.state.news);
+    self.setState({ news: nextNews });
+  });
+};
+componentWillUnmount() {
+  window.ee.removeListener('News.add');
+};
+
 
   render() {
     return (
