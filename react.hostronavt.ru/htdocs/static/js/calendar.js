@@ -1,6 +1,21 @@
 // Calendar
 
 
+let month_list = {
+    1: 'Январь',
+    2: 'Февраль',
+    3: 'Март',
+    4: 'Апрель',
+    5: 'Май',
+    6: 'Июнь',
+    7: 'Июль',
+    8: 'Август',
+    9: 'Сентябрь',
+    10: 'Октябрь',
+    11: 'Ноябрь',
+    12: 'Декабрь'
+}
+
 class MonthFrame extends React.Component {
     render() {
         var eDaysNumber = Number(this.props.data.empty);
@@ -86,22 +101,22 @@ class Month extends React.Component {
 }
 
 class Calendar extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+     month_list: month_list,
+     month: 'Май',
+     month_2: 'Июнь'
+    }
+
+    this.counterPlus = this.counterPlus.bind(this)
+  }
+
+
+
     render() {
 
-        let month_list = {
-            1: 'Январь',
-            2: 'Февраль',
-            3: 'Март',
-            4:'Апрель',
-            5:'Май',
-            6:'Июнь',
-            7:'Июль',
-            8:'Август',
-            9:'Сентябрь',
-            10:'Октябрь',
-            11:'Ноябрь',
-            12:'Декабрь'
-        }
+        
 
         let empty1 = Number(this.props.data.empty);
         let days1 = Number(this.props.data.days);
@@ -110,14 +125,14 @@ class Calendar extends React.Component {
         let value1 = {
             empty: empty1,
             days: days1,
-            month: 'May'
+            month: this.state.month
         }
 
 
         let value2 = {
             empty: empty2,
             days: 30,
-            month: 'June'
+            month: this.state.month_2
         }
 
         return (
