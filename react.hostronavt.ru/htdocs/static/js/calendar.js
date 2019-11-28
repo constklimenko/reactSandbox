@@ -114,6 +114,10 @@ class Calendar extends React.Component {
 
         console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
 
+        const days_in_month = this.getLastDayOfMonth(current_year, current_month);
+
+        const days_in_next_month = current_month == 11 ? this.getLastDayOfMonth(current_year + 1, 0) : this.getLastDayOfMonth(current_year, current_month + 1)
+
 
 
 
@@ -123,6 +127,8 @@ class Calendar extends React.Component {
         month_2: month_list[next_month],
         date: current_date,
         day_shift: day_shift,
+        days: days_in_month,
+        days_of_next_month: days_in_next_month,
     }
         // console.log(current_month)
         // console.log(next_month)
@@ -146,7 +152,7 @@ class Calendar extends React.Component {
 
        
         let empty1 = Number(this.state.day_shift);
-        let days1 = Number(this.props.data.days);
+        let days1 = Number(this.state.days);
         let empty2 = (empty1 + days1) % 7
 
         let value1 = {
@@ -158,7 +164,7 @@ class Calendar extends React.Component {
 
         let value2 = {
             empty: empty2,
-            days: 30,
+            days: Number(this.state.days_of_next_month),
             month: this.state.month_2
         }
 
@@ -178,15 +184,12 @@ class Calendar extends React.Component {
     }
 };
 
-var date_info = {
-    days: 30, 
-    empty: 4,
-}
+
 
 
 
 ReactDOM.render(
-    <Calendar data={date_info}/>,
+    <Calendar />,
     document.getElementById('calendar')
 );
 
