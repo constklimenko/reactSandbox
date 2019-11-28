@@ -84,13 +84,13 @@ class Month extends React.Component {
             <div className="month-frame">
                 <div className="month-frame__title">{value1.month}</div>
                 <div className="month-frame__head">
-                    <div className="month-frame__day-name">Mon </div>
-                    <div className="month-frame__day-name">Tue</div>
-                    <div className="month-frame__day-name">Wen</div>
-                    <div className="month-frame__day-name">Thu</div>
-                    <div className="month-frame__day-name">Fry</div>
-                    <div className="month-frame__day-name">Sat</div>
-                    <div className="month-frame__day-name">Sun</div>
+                    <div className="month-frame__day-name">Пн </div>
+                    <div className="month-frame__day-name">Вт</div>
+                    <div className="month-frame__day-name">Ср</div>
+                    <div className="month-frame__day-name">Чт</div>
+                    <div className="month-frame__day-name">Пт</div>
+                    <div className="month-frame__day-name">Сб</div>
+                    <div className="month-frame__day-name">Вс</div>
 
                 </div>
                 <MonthFrame data={value1} />
@@ -104,11 +104,13 @@ class Calendar extends React.Component {
     constructor(props) {
     super(props);
 
-        let current_date = new Date();
+        const current_date = new Date();
+        const current_year = current_date.getFullYear;
 
-        let current_month = current_date.getMonth();
-        let next_month = current_month == 11 ? 0 : current_month + 1;
+        const current_month = current_date.getMonth();
+        const next_month = current_month == 11 ? 0 : current_month + 1;
         
+        const timeshift = 
 
 
 
@@ -118,14 +120,25 @@ class Calendar extends React.Component {
         month: month_list[current_month],
         month_2: month_list[next_month],
         date: current_date,
+        day_shift:''
     }
         console.log(current_month)
         console.log(next_month)
     
     }
 
-    
 
+    getDayShift(year, month){
+        let date = new Date(year, month , 1);
+        let day = date.getDay();
+        return day == 0 ? 6 : day - 1
+    }
+
+    
+    getLastDayOfMonth(year, month) {
+        let date = new Date(year, month + 1, 0);
+        return date.getDate();
+    };
 
     render() {
 
@@ -165,7 +178,6 @@ class Calendar extends React.Component {
 
 var date_info = {
     days: 30, 
-    month: 11,
     empty: 4,
 }
 
