@@ -72,7 +72,7 @@ class Article extends React.Component {
   render() {
     var item = this.props.data;
     var visible = this.state.visible;
-    console.log('render', this);
+    // console.log('render', this);
 
     return (<div className="article">
       <p className="news__author">{item.author}:</p>
@@ -179,7 +179,7 @@ class Add extends React.Component{
     }];
 
     window.ee.emit('News.add', item);
-    console.log('generate event')
+    // console.log('generate event')
   };
 
 
