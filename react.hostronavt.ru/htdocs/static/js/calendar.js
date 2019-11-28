@@ -2,18 +2,18 @@
 
 
 let month_list = {
-    1: 'Январь',
-    2: 'Февраль',
-    3: 'Март',
-    4: 'Апрель',
-    5: 'Май',
-    6: 'Июнь',
-    7: 'Июль',
-    8: 'Август',
-    9: 'Сентябрь',
-    10: 'Октябрь',
-    11: 'Ноябрь',
-    12: 'Декабрь'
+    0: 'Январь',
+    1: 'Февраль',
+    2: 'Март',
+    3: 'Апрель',
+    4: 'Май',
+    5: 'Июнь',
+    6: 'Июль',
+    7: 'Август',
+    8: 'Сентябрь',
+    9: 'Октябрь',
+    10: 'Ноябрь',
+    11: 'Декабрь'
 }
 
 class MonthFrame extends React.Component {
@@ -103,21 +103,33 @@ class Month extends React.Component {
 class Calendar extends React.Component {
     constructor(props) {
     super(props);
+
+        let current_date = new Date();
+
+        let current_month = current_date.getMonth();
+        let next_month = current_month == 11 ? 0 : current_month + 1;
+        
+
+
+
+
     this.state = {
      month_list: month_list,
-     month: 'Май',
-     month_2: 'Июнь'
+        month: month_list[current_month],
+        month_2: month_list[next_month],
+        date: current_date,
+    }
+        console.log(current_month)
+        console.log(next_month)
+    
     }
 
     
-  }
-
 
 
     render() {
 
-        
-
+       
         let empty1 = Number(this.props.data.empty);
         let days1 = Number(this.props.data.days);
         let empty2 = (empty1 + days1) % 7
@@ -134,6 +146,8 @@ class Calendar extends React.Component {
             days: 30,
             month: this.state.month_2
         }
+
+
 
         return (
             <div className="container">
