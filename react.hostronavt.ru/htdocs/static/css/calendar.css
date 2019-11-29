@@ -1,7 +1,7 @@
 .calendar-frame {
     position: relative;
     max-width: 829px;
-    height: 424px;
+    height: 524px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -95,6 +95,22 @@
 
 .prev_month {
     left: -1em;
+}
+
+@media (max-width: 680px) {
+    .prev_month,
+    .next_month {
+        position: absolute;
+        top: -10px;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+    .next_month {
+        right: 1em;
+    }
+    .prev_month {
+        left: 5em;
+    }
 }
 
 .none {

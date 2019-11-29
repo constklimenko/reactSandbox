@@ -18,10 +18,10 @@ let month_list = {
 
 class MonthFrame extends React.Component {
     render() {
-        var eDaysNumber = Number(this.props.data.empty);
-        var DaysNumber = Number(this.props.data.days);
-        var DaysArray = [];
-        var emptyDaysTemplate = 0;
+        const eDaysNumber = Number(this.props.data.empty);
+        const DaysNumber = Number(this.props.data.days);
+        let DaysArray = [];
+        let emptyDaysTemplate = 0;
 
         if (eDaysNumber >= 1) {
             var eDaysArray = [];
@@ -51,7 +51,7 @@ class MonthFrame extends React.Component {
 
 
 
-        let DaysTemplate = DaysArray.map(
+        const DaysTemplate = DaysArray.map(
             function (item, index) {
                 return (
                     <div key={index + 1 + eDaysNumber} className="day">{item}</div>
@@ -93,9 +93,9 @@ ComponentWillUpdate(){
 }
 
     render(){
-        let DaysNameArray = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+        const DaysNameArray = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
 
-        let DaysTemplate = DaysNameArray.map(
+        const DaysTemplate = DaysNameArray.map(
             (item, index) => <div className="month-frame__day-name" key={index}>{item} </div>
         )
 
@@ -119,7 +119,7 @@ class Calendar extends React.Component {
         
         const day_shift = this.getDayShift(current_year,current_month)
 
-        console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
+         console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
 
         const days_in_month = this.getLastDayOfMonth(current_year, current_month);
 
@@ -139,37 +139,89 @@ class Calendar extends React.Component {
     }
         // console.log(current_month)
         // console.log(next_month)
+
+        this.arrowClick =this.arrowClick.bind(this)
     
     }
 
 
     getDayShift(year, month){
-        let date = new Date(year, month , 1);
-        let day = date.getDay();
+        const date = new Date(year, month , 1);
+        const day = date.getDay();
         return day == 0 ? 6 : day - 1
     }
 
     
     getLastDayOfMonth(year, month) {
-        let date = new Date(year, month + 1, 0);
+        const date = new Date(year, month + 1, 0);
         return date.getDate();
+    };
+
+    arrowClick(e){
+        let dir_value = 0
+        switch (e.target.name){
+            
+            case 'prev':
+                dir_value = -1;break;
+            case 'next':
+                dir_value = 1;
+            }
+
+                 
+        let current_date = new Date(this.state.date);
+        let current_year = current_date.getFullYear();
+
+        let current_month = current_date.getMonth() + dir_value;
+
+        if (current_month < 0){
+            current_month = 11;
+            current_year -= 1;
+
+        }
+
+        if (current_month > 11){
+            current_month = 0;
+            current_year += 1;
+        }
+        let next_month = current_month == 11 ? 0 : current_month + 1;
+
+        const day_shift = this.getDayShift(current_year, current_month)
+
+        console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
+
+        const days_in_month = this.getLastDayOfMonth(current_year, current_month);
+
+        const days_in_next_month = current_month == 11 ? this.getLastDayOfMonth(current_year + 1, 0) : this.getLastDayOfMonth(current_year, current_month + 1)
+
+
+        this.setState(
+            {
+                month: month_list[current_month],
+                month_2: month_list[next_month],
+                date: current_date,
+                day_shift: day_shift,
+                days: days_in_month,
+                days_of_next_month: days_in_next_month,
+            }
+        )
+
     };
 
     render() {
 
        
-        let empty1 = Number(this.state.day_shift);
-        let days1 = Number(this.state.days);
-        let empty2 = (empty1 + days1) % 7
+        const empty1 = Number(this.state.day_shift);
+        const days1 = Number(this.state.days);
+        const empty2 = (empty1 + days1) % 7
 
-        let value1 = {
+        const value1 = {
             empty: empty1,
             days: days1,
             month: this.state.month
         }
 
 
-        let value2 = {
+        const value2 = {
             empty: empty2,
             days: Number(this.state.days_of_next_month),
             month: this.state.month_2
@@ -184,8 +236,8 @@ class Calendar extends React.Component {
                     <Month data={value1} />
 
                     <Month data={value2} />
-                    <div className="next_month"> &gt; </div>
-                    <div className="prev_month"> &lt; </div> 
+                    <div className="next_month" name='next' onClick={this.arrowClick}> &gt; </div>
+                    <div className="prev_month" name='prev' onClick={this.arrowClick}> &lt; </div> 
 
                 </div>
             </div>
