@@ -74,17 +74,12 @@ class MonthFrame extends React.Component {
 
 class Month extends React.Component {
     render() {
-        let value1 = {
-            empty: this.props.data.empty,
-            days: this.props.data.days,
-            month: this.props.data.month
-        };
-
+       
         return (
             <div className="month-frame">
-                <div className="month-frame__title">{value1.month}</div>
+                <div className="month-frame__title">{this.props.data.month}</div>
                 <MonthFrameHead/>
-                <MonthFrame data={value1} />
+                <MonthFrame data={this.props.data} />
             </div>
         )
 
@@ -98,16 +93,15 @@ ComponentWillUpdate(){
 }
 
     render(){
+        let DaysNameArray = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+
+        let DaysTemplate = DaysNameArray.map(
+            (item, index) => <div className="month-frame__day-name" key={index}>{item} </div>
+        )
+
         return(
             <div className="month-frame__head">
-                <div className="month-frame__day-name">Пн </div>
-                <div className="month-frame__day-name">Вт</div>
-                <div className="month-frame__day-name">Ср</div>
-                <div className="month-frame__day-name">Чт</div>
-                <div className="month-frame__day-name">Пт</div>
-                <div className="month-frame__day-name">Сб</div>
-                <div className="month-frame__day-name">Вс</div>
-
+                {DaysTemplate}
             </div>
         )
     }
@@ -135,7 +129,7 @@ class Calendar extends React.Component {
 
 
     this.state = {
-     month_list: month_list,
+        month_list: month_list,
         month: month_list[current_month],
         month_2: month_list[next_month],
         date: current_date,
@@ -190,6 +184,8 @@ class Calendar extends React.Component {
                     <Month data={value1} />
 
                     <Month data={value2} />
+                    <div className="next_month"> &gt; </div>
+                    <div className="prev_month"> &lt; </div> 
 
                 </div>
             </div>

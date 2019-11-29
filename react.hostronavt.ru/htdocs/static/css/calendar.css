@@ -1,8 +1,10 @@
 .calendar-frame {
+    position: relative;
     max-width: 829px;
     height: 424px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
 }
 
 @media (max-width: 680px) {
@@ -14,7 +16,7 @@
 }
 
 .month-frame {
-    width: 50%;
+    /* width: 50%; */
     display: grid;
     grid-template-rows: 1.5em 1.5em auto;
 }
@@ -77,6 +79,22 @@
 
 .lb {
     background: lightblue;
+}
+
+.next_month,
+.prev_month {
+    position: absolute;
+    top: 110px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.next_month {
+    right: -1em;
+}
+
+.prev_month {
+    left: -1em;
 }
 
 .none {
