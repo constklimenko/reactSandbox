@@ -83,20 +83,33 @@ class Month extends React.Component {
         return (
             <div className="month-frame">
                 <div className="month-frame__title">{value1.month}</div>
-                <div className="month-frame__head">
-                    <div className="month-frame__day-name">Пн </div>
-                    <div className="month-frame__day-name">Вт</div>
-                    <div className="month-frame__day-name">Ср</div>
-                    <div className="month-frame__day-name">Чт</div>
-                    <div className="month-frame__day-name">Пт</div>
-                    <div className="month-frame__day-name">Сб</div>
-                    <div className="month-frame__day-name">Вс</div>
-
-                </div>
+                <MonthFrameHead/>
                 <MonthFrame data={value1} />
             </div>
         )
 
+    }
+}
+
+class MonthFrameHead extends React.Component {
+
+ComponentWillUpdate(){
+    return false;
+}
+
+    render(){
+        return(
+            <div className="month-frame__head">
+                <div className="month-frame__day-name">Пн </div>
+                <div className="month-frame__day-name">Вт</div>
+                <div className="month-frame__day-name">Ср</div>
+                <div className="month-frame__day-name">Чт</div>
+                <div className="month-frame__day-name">Пт</div>
+                <div className="month-frame__day-name">Сб</div>
+                <div className="month-frame__day-name">Вс</div>
+
+            </div>
+        )
     }
 }
 
