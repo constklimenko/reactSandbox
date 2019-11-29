@@ -158,17 +158,21 @@ class Calendar extends React.Component {
     };
 
     arrowClick(e){
-        let dir_value = 0
-        switch (e.target.name){
+        let dir_value = 0;
+
+        console.log(e);
+        console.log(e.target)
+        console.log(e.target.className)
+        switch (e.target.className){
             
-            case 'prev':
+            case 'prev_month':
                 dir_value = -1;break;
-            case 'next':
+            case 'next_month':
                 dir_value = 1;
             }
 
                  
-        let current_date = new Date(this.state.date);
+        let current_date = this.state.date;
         let current_year = current_date.getFullYear();
 
         let current_month = current_date.getMonth() + dir_value;
@@ -236,8 +240,8 @@ class Calendar extends React.Component {
                     <Month data={value1} />
 
                     <Month data={value2} />
-                    <div className="next_month" name='next' onClick={this.arrowClick}> &gt; </div>
-                    <div className="prev_month" name='prev' onClick={this.arrowClick}> &lt; </div> 
+                    <div className="next_month" data-name={1} onClick={this.arrowClick}> &gt; </div>
+                    <div className="prev_month" data-name={-1} onClick={this.arrowClick}> &lt; </div> 
 
                 </div>
             </div>
