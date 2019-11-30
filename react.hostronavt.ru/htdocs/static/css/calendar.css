@@ -89,7 +89,7 @@
 .next_month,
 .prev_month {
     position: absolute;
-    top: 110px;
+    top: 150px;
     font-size: 2rem;
     cursor: pointer;
 }

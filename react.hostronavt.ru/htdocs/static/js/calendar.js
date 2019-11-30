@@ -161,9 +161,9 @@ class Calendar extends React.Component {
     arrowClick(e){
         let dir_value = 0;
 
-        console.log(e);
-        console.log(e.target)
-        console.log(e.target.className)
+        // console.log(e);
+        // console.log(e.target)
+        // console.log(e.target.className)
         switch (e.target.className){
             
             case 'prev_month':
@@ -217,6 +217,7 @@ class Calendar extends React.Component {
         )
 
     };
+    
 
     render() {
 
