@@ -4,6 +4,7 @@
     height: 524px;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2rem auto;
     justify-items: center;
 }
 
@@ -13,6 +14,10 @@
         grid-template-rows: 1fr 1fr;
         grid-gap: 2em;
     }
+}
+
+.calendar-frame__year {
+    grid-column: 1/3;
 }
 
 .month-frame {

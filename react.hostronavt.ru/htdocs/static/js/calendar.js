@@ -244,6 +244,7 @@ class Calendar extends React.Component {
             <div className="container">
 
                 <div className="calendar-frame">
+        <div className="calendar-frame__year">{this.state.year}</div>
                     <Month data={value1} />
 
                     <Month data={value2} />
