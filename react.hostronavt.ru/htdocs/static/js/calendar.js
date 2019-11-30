@@ -119,7 +119,7 @@ class Calendar extends React.Component {
         
         const day_shift = this.getDayShift(current_year,current_month)
 
-         console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
+         //console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
 
         const days_in_month = this.getLastDayOfMonth(current_year, current_month);
 
@@ -136,6 +136,7 @@ class Calendar extends React.Component {
         day_shift: day_shift,
         days: days_in_month,
         days_of_next_month: days_in_next_month,
+        year:current_year,
     }
         // console.log(current_month)
         // console.log(next_month)
@@ -172,7 +173,7 @@ class Calendar extends React.Component {
             }
 
                  
-        let current_date = this.state.date;
+        const current_date = this.state.date;
         let current_year = current_date.getFullYear();
 
         let current_month = current_date.getMonth() + dir_value;
@@ -187,11 +188,16 @@ class Calendar extends React.Component {
             current_month = 0;
             current_year += 1;
         }
+
+
+       const new_current_date = new Date(current_year, current_month)
+        
+        //console.log(`current date - ${new_current_date} current month - ${current_month} current day shift - ${day_shift}`)
         let next_month = current_month == 11 ? 0 : current_month + 1;
 
         const day_shift = this.getDayShift(current_year, current_month)
 
-        console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
+        //console.log(`current year - ${current_year} current month - ${current_month} current day shift - ${day_shift}`)
 
         const days_in_month = this.getLastDayOfMonth(current_year, current_month);
 
@@ -202,10 +208,11 @@ class Calendar extends React.Component {
             {
                 month: month_list[current_month],
                 month_2: month_list[next_month],
-                date: current_date,
+                date: new_current_date,
                 day_shift: day_shift,
                 days: days_in_month,
                 days_of_next_month: days_in_next_month,
+                year: current_year,
             }
         )
 
