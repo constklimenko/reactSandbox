@@ -1,0 +1,27 @@
+html {
+    width: 100%;
+}
+
+body {
+    width: 1200px;
+    padding: 1.2%;
+    margin: auto;
+}
+
+.label-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 48.8vw 48.8vw;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.label-front {
+    display: grid;
+    grid-template-rows: 17fr 23fr 60fr;
+    border: 1px solid black;
+}
+
+.label-header {
+    background: red;
+}
