@@ -39,6 +39,25 @@
         text-align: center;
     }
     
+    .first-price {
+        text-transform: uppercase;
+        font-size: 28px;
+        padding: 10px 1em 10px;
+        text-align: center;
+    }
+    
+    .second-price {
+        text-transform: uppercase;
+        font-size: 38px;
+        padding: 0 1em 0 1em;
+        color: red;
+        text-align: center;
+    }
+    
+    .price {
+        font-size: 3em;
+    }
+    
     .label-footer {
         width: 20%;
         justify-self: end;
