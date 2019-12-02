@@ -1,65 +1,93 @@
-    html {
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    body {
-        width: 1200px;
-        padding: 1.2%;
-        margin: auto;
-    }
-    
-    .label-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 48.8vw 48.8vw;
-        overflow: hidden;
-        border: 1px solid black;
-    }
-    
-    .label-front {
-        display: grid;
-        grid-template-rows: 17fr 23fr 22fr 22fr 16fr;
-        border: 1px solid black;
-    }
-    
-    .label-header {
-        background: red;
-        text-transform: uppercase;
-        font-size: 38px;
-        padding: 1em;
-        color: white;
-        text-align: center;
-    }
-    
-    .label-title {
-        text-transform: uppercase;
-        font-size: 38px;
-        padding: 1em;
-        text-align: center;
-    }
-    
-    .first-price {
-        text-transform: uppercase;
-        font-size: 28px;
-        padding: 10px 1em 10px;
-        text-align: center;
-    }
-    
-    .second-price {
-        text-transform: uppercase;
-        font-size: 38px;
-        padding: 0 1em 0 1em;
-        color: red;
-        text-align: center;
-    }
-    
-    .price {
-        font-size: 3em;
-    }
-    
-    .label-footer {
-        width: 20%;
-        justify-self: end;
-        background: linear-gradient(to bottom right, white 50%, red 50%, red 100%);
-    }
+        html {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        body {
+            width: 1200px;
+            padding: 1.2%;
+            margin: auto;
+        }
+        
+        .label-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 48.8vw 48.8vw;
+            overflow: hidden;
+            grid-gap: 2px;
+        }
+        
+        .label-front {
+            display: grid;
+            grid-template-rows: 17fr 23fr 22fr 22fr 16fr;
+            border: 1px solid black;
+        }
+        
+        .label-header {
+            background: red;
+            text-transform: uppercase;
+            font-size: 38px;
+            padding: 1em;
+            color: white;
+            text-align: center;
+        }
+        
+        .label-title {
+            text-transform: uppercase;
+            font-size: 38px;
+            padding: 1em;
+            text-align: center;
+        }
+        
+        .first-price {
+            text-transform: uppercase;
+            font-size: 28px;
+            padding: 10px 1em 10px;
+            text-align: center;
+        }
+        
+        .second-price {
+            text-transform: uppercase;
+            font-size: 38px;
+            padding: 0 1em 0 1em;
+            color: red;
+            text-align: center;
+        }
+        
+        .price {
+            font-size: 3em;
+        }
+        
+        .label-footer {
+            width: 20%;
+            justify-self: end;
+            background: linear-gradient(to bottom right, white 50%, red 50%, red 100%);
+        }
+        
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            html {
+                width: 29.7cm;
+                box-sizing: border-box;
+            }
+            body {
+                width: 29cm!important;
+                padding: 0;
+                margin: 0;
+            }
+            .label-grid {
+                grid-template-rows: 50% 50%;
+                overflow: hidden;
+                border: 1px solid black;
+                grid-gap: 0.3cm;
+            }
+            .label-header {
+                background: red;
+            }
+            .label-footer {
+                background: linear-gradient(to bottom right, white 50%, red 50%, red 100%);
+            }
+        }
