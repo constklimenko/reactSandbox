@@ -1,5 +1,5 @@
 // Calendar
-
+window.ee = new EventEmitter()
 
 let month_list = {
     0: 'Январь',
@@ -145,6 +145,88 @@ class Calendar extends React.Component {
     
     }
 
+    componentDidMount(){
+
+        // функционал календаря
+        var oval_count = 0;
+
+
+
+        var Elements = document.getElementsByClassName("day");
+        var days_list = new Array(Elements.length);
+
+        days_list.forEach(element => {
+            element = 0;
+        });
+
+        for (var i = 0; i < Elements.length; i++) {
+
+            Elements[i].onclick = toggleOval;
+            Elements[i].dataNumber = i;
+
+        }
+
+        function toggleOval() {
+
+            let number = this.dataNumber;
+            // alert(number);
+            if (days_list[number] != 1) {
+
+                if (oval_count < 2) {
+                    this.classList.toggle('month-frame__oval');
+                    oval_count++;
+                    days_list[number] = 1;
+                    underblue()
+                }
+                else {
+                    //  alert('oval_count >= 2');
+                }
+
+            } else {
+                if (oval_count > 0) {
+                    this.classList.toggle('month-frame__oval');
+                    oval_count--;
+                    days_list[number] = 0;
+                    underblue()
+                }
+                else {
+                    //  alert('oval_count <= 0');
+                }
+            }
+
+
+
+        }
+
+        function underblue() {
+            if (oval_count == 2) {
+                let left_num = 0;
+                let right_num = 0;
+
+                for (let j = 0; j < days_list.length; j++) {
+                    if (days_list[j] == 1) {
+                        if (left_num == 0) {
+                            left_num = j;
+                        } else {
+                            right_num = j;
+                        }
+                    }
+
+                }
+
+                for (let i = left_num + 1; i < right_num; i++) {
+                    Elements[i].classList.toggle('lb');
+                }
+
+            }
+            else {
+                for (let i = 0; i < Elements.length; i++) {
+                    Elements[i].classList.remove('lb');
+                }
+            }
+        }
+    }
+
 
     getDayShift(year, month){
         const date = new Date(year, month , 1);
@@ -214,7 +296,9 @@ class Calendar extends React.Component {
                 days_of_next_month: days_in_next_month,
                 year: current_year,
             }
-        )
+        );
+
+        window.ee.emit('arrow.click');
 
     };
     
@@ -272,81 +356,3 @@ ReactDOM.render(
 
  
 
-// функционал календаря
-var oval_count = 0;
-
-
-
-var Elements = document.getElementsByClassName("day");
-var days_list = new Array(Elements.length);
-
-days_list.forEach(element => {
-    element = 0;
-});
-
-for (var i = 0; i < Elements.length; i++) {
-
-    Elements[i].onclick = toggleOval;
-    Elements[i].dataNumber = i;
-
-}
-
-function toggleOval() {
-
-    let number = this.dataNumber;
-    // alert(number);
-    if (days_list[number] != 1) {
-
-        if (oval_count < 2) {
-            this.classList.toggle('month-frame__oval');
-            oval_count++;
-            days_list[number] = 1;
-            underblue()
-        }
-        else {
-            //  alert('oval_count >= 2');
-        }
-
-    } else {
-        if (oval_count > 0) {
-            this.classList.toggle('month-frame__oval');
-            oval_count--;
-            days_list[number] = 0;
-            underblue()
-        }
-        else {
-            //  alert('oval_count <= 0');
-        }
-    }
-
-
-
-}
-
-function underblue() {
-    if (oval_count == 2) {
-        let left_num = 0;
-        let right_num = 0;
-
-        for (let j = 0; j < days_list.length; j++) {
-            if (days_list[j] == 1) {
-                if (left_num == 0) {
-                    left_num = j;
-                } else {
-                    right_num = j;
-                }
-            }
-
-        }
-
-        for (let i = left_num + 1; i < right_num; i++) {
-            Elements[i].classList.toggle('lb');
-        }
-
-    }
-    else {
-        for (let i = 0; i < Elements.length; i++) {
-            Elements[i].classList.remove('lb');
-        }
-    }
-}
