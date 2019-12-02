@@ -141,11 +141,22 @@ class Calendar extends React.Component {
         // console.log(current_month)
         // console.log(next_month)
 
-        this.arrowClick =this.arrowClick.bind(this)
+        this.arrowClick =this.arrowClick.bind(this);
+        this.calendarToggler = this.calendarToggler.bind(this)
     
     }
 
     componentDidMount(){
+
+        this.calendarToggler()
+    };
+
+    componentDidUpdate() {
+
+        this.calendarToggler()
+    };
+
+    calendarToggler(){
 
         // функционал календаря
         var oval_count = 0;
@@ -163,6 +174,8 @@ class Calendar extends React.Component {
 
             Elements[i].onclick = toggleOval;
             Elements[i].dataNumber = i;
+            Elements[i].classList.remove('lb');
+            Elements[i].classList.remove('month-frame__oval');
 
         }
 
