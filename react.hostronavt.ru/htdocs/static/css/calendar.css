@@ -35,7 +35,7 @@
 
 .month-frame__days {
     max-width: 301px;
-    height: 10em;
+    /* height: 10em; */
     grid-template-rows: repeat(5, 2.5em);
 }
 
