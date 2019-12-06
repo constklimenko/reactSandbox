@@ -13,13 +13,13 @@ var labels_collection = [
             ],
 
             [
-            'Ширина посадочного места',
-            '35 см'
+                'Ширина посадочного места',
+                '35 см'
             ],
 
             [
-            'Габариты в сложенном состоянии',
-            '110*45*33'
+                'Габариты в сложенном состоянии',
+                '110*45*33'
             ],
         ]
     },
@@ -39,126 +39,143 @@ class LabelApp extends React.Component {
         return (
             <div>
                 <section className="label-form">
-                <div className="label-grid">
-                    <div className="label-front">
-                        <div className="label-header">
-                            <label >товар со скидкой?<input  type="checkbox" /></label>
-
-
-
-                        </div>
-                        <div className="label-title">
-
-                            санки-коляска <br />> пикате арктик</div>
-
-                        <div className="first-price">цена <input  type="text" /> руб</div>
-                        <div className="second-price">цена <input type="text"  /> руб</div>
-                        <div className="label-footer"></div>
-                    </div>
-
-                    <div className="label-back">
-                        <div className="label-header">описание</div>
-                        <div className="label-back__text">
-                            <div className="complectation">
-                                Комплектация:
-                        <ul>
-                                    <li> <input type="text" /> </li>
-                                    <li> <input type="text" /> </li>
-                                    <li> <input type="text" /> </li>
-                                    <button>добавить строку</button>
-                                </ul>
-                            </div>
-                            <p><strong>Технические характеристики</strong> </p>
-
-                            <table className="tech-char">
-                                <tbody>
-                                    <tr><td><input type="text" /></td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td> <input type="text" /></td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-                                    <tr><td><input type="text" /></td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-                                    <tr><td> <input type="text" /></td>
-                                        <td><input type="text" /></td>
-                                    </tr>
-
-                                    <tr><td><button>добавить строку таблицы</button></td></tr>
-
-
-                                </tbody>
-
-                            </table>
-                            <p><button> Сохранить новый ценник </button></p>
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-            </section>
-
-                <section className="label-frame">
                     <div className="label-grid">
                         <div className="label-front">
-                            <div className="label-header">товар со скидкой</div>
-                            <div className="label-title">санки-коляска <br/>> пикате арктик</div>
+                            <div className="label-header">
+                                <label >товар со скидкой?<input type="checkbox" /></label>
 
-                                <div className="first-price">цена <span className="price">7000</span> руб</div>
-                                <div className="second-price">цена <span className="price">7000</span> руб</div>
-                                <div className="label-footer"></div>
-                            </div>
-
-                            <div className="label-back">
-                                <div className="label-header">описание</div>
-                                <div className="label-back__text">
-                                    <div className="complectation">
-                                        Комплектация:
-                        <ul>
-                                            <li>Варежки для рук</li>
-                                            <li>Рюкзак для мамы</li>
-                                            <li>Отстёгивающийся тент</li>
-                                            <li>Меховой конверт белого цвета</li>
-                                        </ul>
-                                    </div>
-                                    <p><strong>Технические характеристики</strong> </p>
-
-                                    <table className="tech-char">
-                                        <tbody>
-                                            <tr><td>Вес модели</td>
-                                                <td>13 кг</td>
-                                            </tr>
-
-                                            <tr><td>Ширина посадочного места</td>
-                                                <td>35 см</td>
-                                            </tr>
-
-                                            <tr><td>Габариты в сложенном состоянии</td>
-                                                <td>rtsr</td>
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
 
 
                             </div>
+                            <div className="label-title">
+
+                             Тип товара   <input type="text" /> <br /> Модель <input type="text" /></div>
+
+                            <div className="first-price">цена <input type="text" /> руб</div>
+                            <div className="second-price">цена <input type="text" /> руб</div>
+                            <div className="label-footer"></div>
                         </div>
-    </section>
-    </div>
-                )
-            }
+
+                        <div className="label-back">
+                            <div className="label-header">описание</div>
+                            <div className="label-back__text">
+                                <div className="complectation">
+                                    Комплектация:
+                        <ul>
+                                        <li> <input type="text" /> </li>
+                                        <li> <input type="text" /> </li>
+                                        <li> <input type="text" /> </li>
+                                        <button>добавить строку</button>
+                                    </ul>
+                                </div>
+                                <p><strong>Технические характеристики</strong> </p>
+
+                                <table className="tech-char">
+                                    <tbody>
+                                        <tr><td>характеристика</td>
+                                            <td>значение</td>
+                                        </tr>
+                                        <tr><td><input type="text" /></td>
+                                            <td><input type="text" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td> <input type="text" /></td>
+                                            <td><input type="text" /></td>
+                                        </tr>
+                                        <tr><td><input type="text" /></td>
+                                            <td><input type="text" /></td>
+                                        </tr>
+                                        <tr><td> <input type="text" /></td>
+                                            <td><input type="text" /></td>
+                                        </tr>
+
+                                        <tr><td><button>добавить строку таблицы</button></td></tr>
+
+
+                                    </tbody>
+
+                                </table>
+                                <p><button> Сохранить новый ценник </button></p>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+<LabelFrame/>
+
+            </div>
+        )
+    }
+}
+
+
+class LabelFrame extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+
         }
-        
-        
-        
-        ReactDOM.render(
-    <LabelApp />,
-                document.getElementById('label_app')
+    }
+
+    render(){
+        return (<section className="label-frame">
+            <div className="label-grid">
+                <div className="label-front">
+                    <div className="label-header">товар со скидкой</div>
+                    <div className="label-title">санки-коляска <br /> пикате арктик</div>
+
+                    <div className="first-price">цена <span className="price">7000</span> руб</div>
+                    <div className="second-price">цена <span className="price">7000</span> руб</div>
+                    <div className="label-footer"></div>
+                </div>
+
+                <div className="label-back">
+                    <div className="label-header">описание</div>
+                    <div className="label-back__text">
+                        <div className="complectation">
+                            Комплектация:
+                        <ul>
+                                <li>Варежки для рук</li>
+                                <li>Рюкзак для мамы</li>
+                                <li>Отстёгивающийся тент</li>
+                                <li>Меховой конверт белого цвета</li>
+                            </ul>
+                        </div>
+                        <p><strong>Технические характеристики</strong> </p>
+
+                        <table className="tech-char">
+                            <tbody>
+                                <tr><td>Вес модели</td>
+                                    <td>13 кг</td>
+                                </tr>
+
+                                <tr><td>Ширина посадочного места</td>
+                                    <td>35 см</td>
+                                </tr>
+
+                                <tr><td>Габариты в сложенном состоянии</td>
+                                    <td>rtsr</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>)
+    }
+}
+
+
+
+ReactDOM.render(
+    <LabelApp data={labels_collection} />,
+    document.getElementById('label_app')
 );
