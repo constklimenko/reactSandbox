@@ -1,5 +1,8 @@
 var labels_collection = [
     {
+        description_exist: true,
+        type: 'санки-коляска',
+        model: 'арктик бежевый',
         checkbox_is_checked: true,
         price: ['7000', '7000'],
         complectation: ['Варежки для рук',
@@ -23,14 +26,43 @@ var labels_collection = [
             ],
         ]
     },
-    {},
-    {}
+    {
+        description_exist: true,
+        type: 'санки-коляска',
+        model: 'арктик шоколад',
+        checkbox_is_checked: true,
+        price: ['7000', '7000'],
+        complectation: ['Варежки для рук',
+            'Рюкзак для мамы',
+            'Отстёгивающийся тент',
+            'Меховой конверт белого цвета',],
+        tech_char: [
+            [
+                'Вес модели',
+                '13 кг'
+            ],
+
+            [
+                'Ширина посадочного места',
+                '35 см'
+            ],
+
+            [
+                'Габариты в сложенном состоянии',
+                '110*78*33'
+            ],
+        ]
+    },
+
 ];
 
 class LabelApp extends React.Component {
     constructor(props) {
         super(props);
+        const labels_collection = props.data;
         this.state = {
+
+
 
         }
     }
@@ -49,7 +81,7 @@ class LabelApp extends React.Component {
                             </div>
                             <div className="label-title">
 
-                             Тип товара   <input type="text" /> <br /> Модель <input type="text" /></div>
+                                Тип товара   <input type="text" /> <br /> Модель <input type="text" /></div>
 
                             <div className="first-price">цена <input type="text" /> руб</div>
                             <div className="second-price">цена <input type="text" /> руб</div>
@@ -104,7 +136,7 @@ class LabelApp extends React.Component {
                         </div>
                     </div>
                 </section>
-<LabelFrame/>
+                <LabelFrame data={this.props.data} />
 
             </div>
         )
@@ -112,7 +144,35 @@ class LabelApp extends React.Component {
 }
 
 
-class LabelFrame extends React.Component{
+class LabelFrame extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: props.data
+
+        }
+        console.log(props)
+        console.log(this.state)
+    }
+
+    render() {
+
+        let data = this.state.data;
+        let label_frame_template = data.map(
+            function (item, index) {
+
+                return (<section className="label-frame"><div className="label-grid"> <LabelItem data={item} /></div>
+
+                </section>)
+
+
+            }
+        )
+    }
+}
+
+
+class LabelItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -120,15 +180,19 @@ class LabelFrame extends React.Component{
         }
     }
 
-    render(){
-        return (<section className="label-frame">
-            <div className="label-grid">
-                <div className="label-front">
-                    <div className="label-header">товар со скидкой</div>
-                    <div className="label-title">санки-коляска <br /> пикате арктик</div>
+    render() {
 
-                    <div className="first-price">цена <span className="price">7000</span> руб</div>
-                    <div className="second-price">цена <span className="price">7000</span> руб</div>
+        if (item.description_exist) {
+            return (<div className="label-box" key={index}>
+
+                <div className="label-front" >
+                    <div className="label-header">
+
+                        {item.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
+                    <div className="label-title">{item.type} <br /> {item.model} </div>
+
+                    <div className="first-price">цена <span className="price">{item.price[0]}</span> руб</div>
+                    <div className="second-price">цена <span className="price">{item.price[1]}</span> руб</div>
                     <div className="label-footer"></div>
                 </div>
 
@@ -167,9 +231,31 @@ class LabelFrame extends React.Component{
                     </div>
 
 
+                </div></div>
+
+            )
+        }
+        else {
+            return (
+
+                <div className="label-front" key={index}>
+                    <div className="label-header">
+
+                        {item.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
+                    <div className="label-title">{item.type} <br /> {item.model} </div>
+
+                    <div className="first-price">цена <span className="price">{item.price[0]}</span> руб</div>
+                    <div className="second-price">цена <span className="price">{item.price[1]}</span> руб</div>
+                    <div className="label-footer"></div>
                 </div>
-            </div>
-        </section>)
+
+
+            )
+        }
+
+
+
+
     }
 }
 
