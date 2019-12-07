@@ -9,6 +9,10 @@
             margin: auto;
         }
         
+        .label-form {
+            margin-bottom: 40px;
+        }
+        
         .label-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -28,6 +32,15 @@
         
         .label-back__text {
             padding: 2em;
+        }
+        
+        .label--spanbox {
+            grid-column: span 2;
+        }
+        
+        .label-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
         }
         
         .label-header {

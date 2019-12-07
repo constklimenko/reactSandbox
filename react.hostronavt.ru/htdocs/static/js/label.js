@@ -1,4 +1,4 @@
-var labels_collection = [
+var labels_collection = new Array(
     {
         description_exist: true,
         type: 'санки-коляска',
@@ -54,12 +54,14 @@ var labels_collection = [
         ]
     },
 
-];
+);
 
 class LabelApp extends React.Component {
     constructor(props) {
         super(props);
-        const labels_collection = props.data;
+
+        console.log(`App.props.labels_collection ${props.labels_collection} `)
+        const labels_collection = props.labels_collection;
         this.state = {
 
 
@@ -68,6 +70,9 @@ class LabelApp extends React.Component {
     }
 
     render() {
+
+        console.log(`App.props.labels_collection - ${this.props.labels_collection} `);
+        console.log(`App.props.labels_collection.type - ${this.props.labels_collection.type} `)
         return (
             <div>
                 <section className="label-form">
@@ -136,7 +141,7 @@ class LabelApp extends React.Component {
                         </div>
                     </div>
                 </section>
-                <LabelFrame data={this.props.data} />
+                <LabelFrame labels_collection={this.props.labels_collection} />
 
             </div>
         )
@@ -148,25 +153,34 @@ class LabelFrame extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.data
+            labels_collection: props.labels_collection
 
         }
-        console.log(props)
-        console.log(this.state)
+
     }
 
     render() {
 
-        let data = this.state.data;
+        let data = this.state.labels_collection;
         let label_frame_template = data.map(
             function (item, index) {
-
-                return (<section className="label-frame"><div className="label-grid"> <LabelItem data={item} /></div>
-
-                </section>)
+                console.log(`item.description_exist ${item.description_exist}`)
+                return (
+                    <div key={index} className={item.description_exist?'label--spanbox':''}  ><LabelItem data={item} /></div>
+                
+                
+                )
 
 
             }
+        )
+
+        return (<section className="label-frame" > 
+        <div className="label-grid">
+            {label_frame_template}
+        </div>
+
+        </section>
         )
     }
 }
@@ -182,17 +196,19 @@ class LabelItem extends React.Component {
 
     render() {
 
-        if (item.description_exist) {
-            return (<div className="label-box" key={index}>
+        console.log(`in LabelItem this.props.data.model ${this.props.data.model}`)
+
+        if (this.props.data.description_exist) {
+            return (<div className="label-box" >
 
                 <div className="label-front" >
                     <div className="label-header">
 
-                        {item.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
-                    <div className="label-title">{item.type} <br /> {item.model} </div>
+                        {this.props.data.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
+                    <div className="label-title">{this.props.data.type} <br /> {this.props.data.model} </div>
 
-                    <div className="first-price">цена <span className="price">{item.price[0]}</span> руб</div>
-                    <div className="second-price">цена <span className="price">{item.price[1]}</span> руб</div>
+                    <div className="first-price">цена <span className="price">{this.props.data.price[0]}</span> руб</div>
+                    <div className="second-price">цена <span className="price">{this.props.data.price[1]}</span> руб</div>
                     <div className="label-footer"></div>
                 </div>
 
@@ -231,21 +247,22 @@ class LabelItem extends React.Component {
                     </div>
 
 
-                </div></div>
+                </div>
+            </div>
 
             )
         }
         else {
             return (
 
-                <div className="label-front" key={index}>
+                <div className="label-front" >
                     <div className="label-header">
 
-                        {item.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
-                    <div className="label-title">{item.type} <br /> {item.model} </div>
+                        {this.props.data.checkbox_is_checked ? 'товар со скидкой' : ''}</div>
+                    <div className="label-title">{this.props.data.type} <br /> {this.props.data.model} </div>
 
-                    <div className="first-price">цена <span className="price">{item.price[0]}</span> руб</div>
-                    <div className="second-price">цена <span className="price">{item.price[1]}</span> руб</div>
+                    <div className="first-price">цена <span className="price">{this.props.data.price[0]}</span> руб</div>
+                    <div className="second-price">цена <span className="price">{this.props.data.price[1]}</span> руб</div>
                     <div className="label-footer"></div>
                 </div>
 
@@ -259,9 +276,9 @@ class LabelItem extends React.Component {
     }
 }
 
-
+console.log(`labels_collection ${labels_collection[0].model} , ${labels_collection[1].model}`)
 
 ReactDOM.render(
-    <LabelApp data={labels_collection} />,
+    <LabelApp labels_collection={labels_collection} />,
     document.getElementById('label_app')
 );
