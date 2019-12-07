@@ -27,6 +27,33 @@ var labels_collection = new Array(
         ]
     },
     {
+        description_exist: false,
+        type: 'санки-коляска',
+        model: 'ника 7.1',
+        checkbox_is_checked: true,
+        price: ['7000', '7000'],
+        complectation: ['Варежки для рук',
+            'Рюкзак для мамы',
+            'Отстёгивающийся тент',
+            'Меховой конверт белого цвета',],
+        tech_char: [
+            [
+                'Вес модели',
+                '12 кг'
+            ],
+
+            [
+                'Ширина посадочного места',
+                '33 см'
+            ],
+
+            [
+                'Габариты в сложенном состоянии',
+                '110*45*33'
+            ],
+        ]
+    },
+    {
         description_exist: true,
         type: 'санки-коляска',
         model: 'арктик шоколад',
@@ -52,9 +79,40 @@ var labels_collection = new Array(
                 '110*78*33'
             ],
         ]
-    },
+    }, {
+    description_exist: false,
+    type: 'санки-коляска',
+    model: 'ника 7.1',
+    checkbox_is_checked: true,
+    price: ['7000', '7000'],
+    complectation: ['Варежки для рук',
+        'Рюкзак для мамы',
+        'Отстёгивающийся тент',
+        'Меховой конверт белого цвета',],
+    tech_char: [
+        [
+            'Вес модели',
+            '12 кг'
+        ],
+
+        [
+            'Ширина посадочного места',
+            '33 см'
+        ],
+
+        [
+            'Габариты в сложенном состоянии',
+            '110*45*33'
+        ],
+    ]
+},
+
+
+
 
 );
+
+var labels_collection2 = labels_collection.filter((item) => item.description_exist == false).concat(labels_collection.filter((item) => item.description_exist == true))
 
 class LabelApp extends React.Component {
     constructor(props) {
@@ -279,6 +337,6 @@ class LabelItem extends React.Component {
 console.log(`labels_collection ${labels_collection[0].model} , ${labels_collection[1].model}`)
 
 ReactDOM.render(
-    <LabelApp labels_collection={labels_collection} />,
+    <LabelApp labels_collection={labels_collection2} />,
     document.getElementById('label_app')
 );
