@@ -1,85 +1,34 @@
-var labels_collection = new Array(
-    {
-        description_exist: true,
-        type: 'санки-коляска',
-        model: 'арктик бежевый',
-        checkbox_is_checked: true,
-        price: ['7000', '7000'],
-        complectation: ['Варежки для рук',
-            'Рюкзак для мамы',
-            'Отстёгивающийся тент',
-            'Меховой конверт белого цвета',],
-        tech_char: [
-            [
-                'Вес модели',
-                '13 кг'
-            ],
+// let response = fetch('label_collection.txt');
+// console.log(response)
+let array =[{
+    description_exist: true,
+    type: 'санки-коляска',
+    model: 'арктик бежевый',
+    checkbox_is_checked: true,
+    price: ['7000', '7000'],
+    complectation: ['Варежки для рук',
+        'Рюкзак для мамы',
+        'Отстёгивающийся тент',
+        'Меховой конверт белого цвета',],
+    tech_char: [
+        [
+            'Вес модели',
+            '13 кг'
+        ],
 
-            [
-                'Ширина посадочного места',
-                '35 см'
-            ],
+        [
+            'Ширина посадочного места',
+            '35 см'
+        ],
 
-            [
-                'Габариты в сложенном состоянии',
-                '110*45*33'
-            ],
-        ]
-    },
-    {
-        description_exist: false,
-        type: 'санки-коляска',
-        model: 'ника 7.1',
-        checkbox_is_checked: true,
-        price: ['7000', '7000'],
-        complectation: ['Варежки для рук',
-            'Рюкзак для мамы',
-            'Отстёгивающийся тент',
-            'Меховой конверт белого цвета',],
-        tech_char: [
-            [
-                'Вес модели',
-                '12 кг'
-            ],
+        [
+            'Габариты в сложенном состоянии',
+            '110*45*33'
+        ],
+    ]
+},
 
-            [
-                'Ширина посадочного места',
-                '33 см'
-            ],
-
-            [
-                'Габариты в сложенном состоянии',
-                '110*45*33'
-            ],
-        ]
-    },
-    {
-        description_exist: true,
-        type: 'санки-коляска',
-        model: 'арктик шоколад',
-        checkbox_is_checked: true,
-        price: ['7000', '7000'],
-        complectation: ['Варежки для рук',
-            'Рюкзак для мамы',
-            'Отстёгивающийся тент',
-            'Меховой конверт белого цвета',],
-        tech_char: [
-            [
-                'Вес модели',
-                '13 кг'
-            ],
-
-            [
-                'Ширина посадочного места',
-                '35 см'
-            ],
-
-            [
-                'Габариты в сложенном состоянии',
-                '110*78*33'
-            ],
-        ]
-    }, {
+{
     description_exist: false,
     type: 'санки-коляска',
     model: 'ника 7.1',
@@ -106,10 +55,69 @@ var labels_collection = new Array(
         ],
     ]
 },
+{
+    description_exist: true,
+    type: 'санки-коляска',
+    model: 'арктик шоколад',
+    checkbox_is_checked: true,
+    price: ['7000', '7000'],
+    complectation: ['Варежки для рук',
+        'Рюкзак для мамы',
+        'Отстёгивающийся тент',
+        'Меховой конверт белого цвета',],
+    tech_char: [
+        [
+            'Вес модели',
+            '13 кг'
+        ],
+
+        [
+            'Ширина посадочного места',
+            '35 см'
+        ],
+
+        [
+            'Габариты в сложенном состоянии',
+            '110*78*33'
+        ],
+    ]
+}, {
+    description_exist: false,
+    type: 'санки-коляска',
+    model: 'ника 7.1',
+    checkbox_is_checked: true,
+    price: ['7000', '7000'],
+    complectation: ['Варежки для рук',
+        'Рюкзак для мамы',
+        'Отстёгивающийся тент',
+        'Меховой конверт белого цвета',],
+    tech_char: [
+        [
+            'Вес модели',
+            '12 кг'
+        ],
+
+        [
+            'Ширина посадочного места',
+            '33 см'
+        ],
+
+        [
+            'Габариты в сложенном состоянии',
+            '110*45*33'
+        ],
+    ]
+}]
 
 
 
 
+
+
+
+var labels_collection = new Array(
+
+    array
 );
 
 var labels_collection2 = labels_collection.filter((item) => item.description_exist == false).concat(labels_collection.filter((item) => item.description_exist == true))
@@ -224,19 +232,19 @@ class LabelFrame extends React.Component {
             function (item, index) {
                 console.log(`item.description_exist ${item.description_exist}`)
                 return (
-                    <div key={index} className={item.description_exist?'label--spanbox':''}  ><LabelItem data={item} /></div>
-                
-                
+                    <div key={index} className={item.description_exist ? 'label--spanbox' : ''}  ><LabelItem data={item} /></div>
+
+
                 )
 
 
             }
         )
 
-        return (<section className="label-frame" > 
-        <div className="label-grid">
-            {label_frame_template}
-        </div>
+        return (<section className="label-frame" >
+            <div className="label-grid">
+                {label_frame_template}
+            </div>
 
         </section>
         )
