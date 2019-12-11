@@ -1,127 +1,3 @@
-let response = fetch('static/js/label_collection.json');
-console.log(response)
-
-// var labels_collection = 
-
-fetch('static/js/label_collection.json').then(function (response) {
-    response.json();
-});
-
-
-let array1 =[{
-    description_exist: true,
-    type: 'санки-коляска',
-    model: 'арктик бежевый',
-    checkbox_is_checked: true,
-    price: ['7000', '7000'],
-    complectation: ['Варежки для рук',
-        'Рюкзак для мамы',
-        'Отстёгивающийся тент',
-        'Меховой конверт белого цвета',],
-    tech_char: [
-        [
-            'Вес модели',
-            '13 кг'
-        ],
-
-        [
-            'Ширина посадочного места',
-            '35 см'
-        ],
-
-        [
-            'Габариты в сложенном состоянии',
-            '110*45*33'
-        ],
-    ]
-},
-
-{
-    description_exist: false,
-    type: 'санки-коляска',
-    model: 'ника 7.1',
-    checkbox_is_checked: true,
-    price: ['7000', '7000'],
-    complectation: ['Варежки для рук',
-        'Рюкзак для мамы',
-        'Отстёгивающийся тент',
-        'Меховой конверт белого цвета',],
-    tech_char: [
-        [
-            'Вес модели',
-            '12 кг'
-        ],
-
-        [
-            'Ширина посадочного места',
-            '33 см'
-        ],
-
-        [
-            'Габариты в сложенном состоянии',
-            '110*45*33'
-        ],
-    ]
-},
-{
-    description_exist: true,
-    type: 'санки-коляска',
-    model: 'арктик шоколад',
-    checkbox_is_checked: true,
-    price: ['7000', '7000'],
-    complectation: ['Варежки для рук',
-        'Рюкзак для мамы',
-        'Отстёгивающийся тент',
-        'Меховой конверт белого цвета',],
-    tech_char: [
-        [
-            'Вес модели',
-            '13 кг'
-        ],
-
-        [
-            'Ширина посадочного места',
-            '35 см'
-        ],
-
-        [
-            'Габариты в сложенном состоянии',
-            '110*78*33'
-        ],
-    ]
-}, {
-    description_exist: false,
-    type: 'санки-коляска',
-    model: 'ника 7.1',
-    checkbox_is_checked: true,
-    price: ['7000', '7000'],
-    complectation: ['Варежки для рук',
-        'Рюкзак для мамы',
-        'Отстёгивающийся тент',
-        'Меховой конверт белого цвета',],
-    tech_char: [
-        [
-            'Вес модели',
-            '12 кг'
-        ],
-
-        [
-            'Ширина посадочного места',
-            '33 см'
-        ],
-
-        [
-            'Габариты в сложенном состоянии',
-            '110*45*33'
-        ],
-    ]
-}]
-
-
-
-
-
-
 
 var labels_collection = new Array(
     {
@@ -152,94 +28,15 @@ var labels_collection = new Array(
         ]
     },
 
-        {
-            description_exist: false,
-            type: 'санки-коляска',
-            model: 'ника 7.1',
-            checkbox_is_checked: true,
-            price: ['7000', '7000'],
-            complectation: ['Варежки для рук',
-                'Рюкзак для мамы',
-                'Отстёгивающийся тент',
-                'Меховой конверт белого цвета',],
-            tech_char: [
-                [
-                    'Вес модели',
-                    '12 кг'
-                ],
-
-                [
-                    'Ширина посадочного места',
-                    '33 см'
-                ],
-
-                [
-                    'Габариты в сложенном состоянии',
-                    '110*45*33'
-                ],
-            ]
-        },
-        {
-            description_exist: true,
-            type: 'санки-коляска',
-            model: 'арктик шоколад',
-            checkbox_is_checked: true,
-            price: ['7000', '7000'],
-            complectation: ['Варежки для рук',
-                'Рюкзак для мамы',
-                'Отстёгивающийся тент',
-                'Меховой конверт белого цвета',],
-            tech_char: [
-                [
-                    'Вес модели',
-                    '13 кг'
-                ],
-
-                [
-                    'Ширина посадочного места',
-                    '35 см'
-                ],
-
-                [
-                    'Габариты в сложенном состоянии',
-                    '110*78*33'
-                ],
-            ]
-        }, {
-            description_exist: false,
-            type: 'санки-коляска',
-            model: 'ника 7.1',
-            checkbox_is_checked: true,
-            price: ['7000', '7000'],
-            complectation: ['Варежки для рук',
-                'Рюкзак для мамы',
-                'Отстёгивающийся тент',
-                'Меховой конверт белого цвета',],
-            tech_char: [
-                [
-                    'Вес модели',
-                    '12 кг'
-                ],
-
-                [
-                    'Ширина посадочного места',
-                    '33 см'
-                ],
-
-                [
-                    'Габариты в сложенном состоянии',
-                    '110*45*33'
-                ],
-            ]
-        }
+        
 );
 
-// console.log(labels_collection)
+// console.log(`labels_collection[1].model ${labels_collection[1].model}`)
 // console.log(labels_collection[0])
 
-var labels_collection2 = labels_collection.filter((item) => item.description_exist == false).concat(labels_collection.filter((item) => item.description_exist == true))
+// var labels_collection2 = labels_collection.filter((item) => item.description_exist == false).concat(labels_collection.filter((item) => item.description_exist == true))
 
-console.log(labels_collection2)
+// console.log(labels_collection2)
 class LabelApp extends React.Component {
     constructor(props) {
         super(props);
@@ -460,9 +257,31 @@ class LabelItem extends React.Component {
     }
 }
 
-console.log(`labels_collection ${labels_collection[0].model} , ${labels_collection[1].model}`)
 
-ReactDOM.render(
-    <LabelApp labels_collection={labels_collection2} />,
-    document.getElementById('label_app')
-);
+
+fetch('static/js/label_collection.json').then(function (response) {
+    if(response.ok){
+        response.json().then(function (labels_collection) {
+
+            var labels_collection2 = labels_collection.filter((item) => item.description_exist == false).concat(labels_collection.filter((item) => item.description_exist == true))
+
+            ReactDOM.render(
+                <LabelApp labels_collection={labels_collection2} />,
+                document.getElementById('label_app')
+            );
+
+        });
+    } else {
+
+        ReactDOM.render(
+            <LabelApp labels_collection={labels_collection} />,
+            document.getElementById('label_app2')
+        );
+
+        ReactDOM.render(
+            <h1>Файла с данными о ценниках пока не существует. Ниже расположена форма для его создания и пример того, как всё будет выглядеть</h1>,
+            document.getElementById('label_app')
+        );
+
+    }
+});
