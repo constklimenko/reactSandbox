@@ -1,4 +1,4 @@
 ReactDOM.render(
   <MarketList />,
-  document.getElementById('market_list')
+  document.getElementById('market-list')
 );
