@@ -12,18 +12,23 @@ var sourcemaps = require('gulp-sourcemaps');
 var cleanCss = require('gulp-clean-css');
 var browserSync = require('browser-sync').create();
 
+
+const babel = require('gulp-babel');
+
+
+
 var config = {
     path: {
         less: './src/less/*.less',
-        html: '.public/index.html',
+        html: './react.hostronavt.ru/market_list/index.html',
 
     },
     output: {
-        cssName: 'bundle.min.css',
-        path: './public',
-        path_file: './public/index.html',
-        path_file_css: './public/bundle.min.css',
-        newHtml: '/tmp/fz3temp-2'
+        cssName: 'market_list.css',
+        path: './react.hostronavt.ru/market_list/',
+        path_file: './react.hostronavt.ru/market_list/index.html',
+        path_file_css: './react.hostronavt.ru/market_list/static/css/market_list.css',
+
     }
 }
 
@@ -101,6 +106,20 @@ gulp.task('less', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.output.path))
         .pipe(browserSync.stream());
+});
+
+gulp.task('build', function () {
+    return browserify({ entries: './src/jsx/app.jsx', extensions: ['.jsx'], debug: true })
+        .transform('babelify', { presets: ['es2015', 'react'] })
+        .bundle()
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('babel', function () {
+    return gulp.src('src/jsx/**/*.jsx')
+        .pipe(babel())
+        .pipe(gulp.dest('static/js'))
 });
 
 gulp.task('push', function () {
