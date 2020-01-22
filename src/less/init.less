@@ -2,3 +2,32 @@
 @import (reference) "parts/bootstrap";
 @import "parts/mixins";
 
+#market-list {
+  .size-full;
+  .grid(50%)
+}
+
+.market-list{
+  background-color: antiquewhite;
+  padding: 1em;
+  
+  &__item{
+    box-shadow: 3px 3px 6px gray;
+    padding: 1em;
+    background-color:white;
+    .grid(10% 1fr 1fr 20% );
+    
+    &__title{
+      grid-column: span 2;
+    }
+    
+    &__img {
+      justify-self: stretch;
+      align-self: stretch;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start:  4;
+      background-color: @darkest;
+    }
+  }
+}

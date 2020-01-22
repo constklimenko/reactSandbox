@@ -26,6 +26,7 @@ var config = {
     output: {
         cssName: 'market_list.css',
         path: './react.hostronavt.ru/market_list/',
+        path_css: './react.hostronavt.ru/market_list/static/css/',
         path_file: './react.hostronavt.ru/market_list/index.html',
         path_file_css: './react.hostronavt.ru/market_list/static/css/market_list.css',
 
@@ -104,7 +105,7 @@ gulp.task('less', function () {
         .pipe(authoprefixer())
         // .pipe(cleanCss())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(config.output.path))
+        .pipe(gulp.dest(config.output.path_css))
         .pipe(browserSync.stream());
 });
 
