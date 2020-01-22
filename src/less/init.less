@@ -4,21 +4,38 @@
 
 #market-list {
   .size-full;
-  .grid(50%)
+  .grid(auto auto)
 }
 
 .market-list{
   background-color: antiquewhite;
   padding: 1em;
+ 
+  .grid( max-content repeat(4, 1fr), 3em auto, 10px, 10px);
+  &__title{
+    .title-h4;
+    align-self: center;
+    
+  }
+  
+  &__text, &__filter{
+    font-size: .8rem;
+    text-align: right;
+    align-self: center;
+    
+  }
   
   &__item{
+    grid-column: span 5;
     box-shadow: 3px 3px 6px gray;
     padding: 1em;
     background-color:white;
+    font-size: .9rem;
     .grid(10% 1fr 1fr 20% );
     
     &__title{
       grid-column: span 2;
+      font-weight: bold;
     }
     
     &__img {
@@ -30,4 +47,30 @@
       background-color: @darkest;
     }
   }
+}
+
+.cart{
+  .grid(2em auto, auto);
+  
+  &__tab{
+    .grid(1fr, repeat(auto-fit, 2em));
+    
+    &__item{
+      background-color: @cart;
+      border-bottom-left-radius: 10px;
+      
+      border-top-left-radius: 10px;
+      border: 1px solid gray;
+      align-self: center;
+      text-align: center;
+    }
+  }
+  
+  &__main{
+    background-color: @cart;
+  }
+}
+
+.cart-row{
+  .grid( 12em 5em 5em 2em)
 }

@@ -26,18 +26,40 @@
     <main id="market-list">
         <article class="market-list">
             <div class="market-list__title">Магазин 1000 мелочей</div>
+            <div class="market-list__text">Упорядочить:</div>
+            <select name="filter1" id="filter1" class="market-list__filter">
+                <option value="up">по возрастанию цены</option>
+                
+                <option value="down">по убыванию цены</option>
+                
+                <option value="alphabet">по алфавиту</option>
+            </select>
+            <div class="market-list__text">Группы товаров</div>
+            <select name="filter1" id="filter2" class="market-list__filter">
+                <option value="all">все</option>
+                
+                <option value="animals">животные</option>
+                
+                <option value="stuff">предметы</option>
+            </select>
             
            
             <div class="market-list__item">
                 <input type="checkbox" name="" id=""  class="market-list__item__checkbox">
-                <div class="market-list__item__title">Dinosaur</div> 
+                <div class="market-list__item__title">Dinosaur
+                    <small class="market-list__item__group">animal</small>
+                </div> 
                 <div class="market-list__item__img"></div>
-                <input type="text" class="market-list__item__number">
-                <div class="market-list__item__cost">$1000</div>
-               
-                <div class="market-list__item__up-arrow"></div>
+                <div >
+                    <input class="market-list__item__number" type="text" class="">
+                    <div class="market-list__item__up-arrow"></div>
                 <div class="market-list__item__down-arrow"></div>
                
+                </div>
+                
+                <div class="market-list__item__cost">$1000</div>
+               
+                
             </div>              
             
           
@@ -45,8 +67,27 @@
         </article>
         
         <aside class="cart">
-            <div class="cart__main"></div>
-            <div class="cart__tab"></div>
+            <div class="cart__tab">
+                
+                    <div class="cart__tab__item">1</div>
+                    <div class="cart__tab__item">2</div>
+                    <div class="cart__tab__item">3</div>
+            </div>
+            <div class="cart__main">
+                <div class="cart__main__row">
+                    
+                </div>
+                <div class="cart__main__row cart-row">
+                    <div class="cart-row__title">Dinosaur</div>
+                    <div class="cart-row__group">animal</div>
+                    <div class="cart-row__cost">$1000</div>
+                    <div class="cart-row__number">1</div>
+                    
+                </div>
+                <div class="cart__main__row cart-row"></div>
+                <div class="cart__main__row cart-row"></div>
+            </div>
+            
             <div class="cart__statistics"></div>
         </aside>
         
