@@ -7,29 +7,29 @@ var my_news = [{
   text: 'В четчерг, четвертого числа...',
   bigText: 'в четыре с четвертью часа четыре чёрненьких чумазеньких чертёнка чертили xёрными чернилами чертёж.'
 },
-  {
-    author: 'Просто Вася',
-    text: 'Считаю, что $ должен стоить 35 рублей!',
-    bigText: 'А евро 42!'
-  },
-  {
-    author: 'Гость',
-    text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000',
-    bigText: 'На самом деле платно, просто нужно прочитать очень длинное лицензионное соглашение'
+{
+  author: 'Просто Вася',
+  text: 'Считаю, что $ должен стоить 35 рублей!',
+  bigText: 'А евро 42!'
 },
-  {
-    author: 'Дюбель',
-    text: 'Бум бум бум',
-    bigText: 'мазафака бум'
+{
+  author: 'Гость',
+  text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000',
+  bigText: 'На самом деле платно, просто нужно прочитать очень длинное лицензионное соглашение'
+},
+{
+  author: 'Дюбель',
+  text: 'Бум бум бум',
+  bigText: 'мазафака бум!'
 
-  
-  },
 
-  {
-    author: 'Барракуда',
-    text: 'Съем всех человеков',
-    bigText: 'оставлю только самых тощих'
-  },
+},
+
+{
+  author: 'Барракуда',
+  text: 'Съем всех человеков',
+  bigText: 'оставлю только самых тощих'
+},
 
 ];
 
@@ -38,7 +38,7 @@ var my_news = [{
 class Comments extends React.Component {
   render() {
     return (
-      <div className="comments">
+      < div className="comments">
         Нет новостей - комментировать нечего
 </div>
     )
@@ -47,12 +47,13 @@ class Comments extends React.Component {
 
 class Article extends React.Component {
 
-  static propTypes(){
+  static propTypes() {
     data: React.propTypes.shape({
       author: React.propTypes.string.isRequired,
       text: React.propTypes.string.isRequired,
-      bigText: React.propTypes.string.isRequired,}
-      
+      bigText: React.propTypes.string.isRequired,
+    }
+
     )
 
   };
@@ -66,9 +67,9 @@ class Article extends React.Component {
     this.closeClick = this.closeClick.bind(this);
   }
 
-  
 
-  
+
+
   render() {
     var item = this.props.data;
     var visible = this.state.visible;
@@ -77,18 +78,18 @@ class Article extends React.Component {
     return (<div className="article">
       <p className="news__author">{item.author}:</p>
       <p className="news__text">{item.text}</p>
-      <a href="#" className={'news__readmore ' + (visible? 'none':'')}
-      onClick={this.readmoreClick}
+      <a href="#" className={'news__readmore ' + (visible ? 'none' : '')}
+        onClick={this.readmoreClick}
       >Подробнее</a>
-      <p className={'news__big-text ' + (visible?'':'none')}  >{item.bigText}</p>
+      <p className={'news__big-text ' + (visible ? '' : 'none')}  >{item.bigText}</p>
       <a href="#" onClick={this.closeClick} className={'news__close ' + (visible ? '' : 'none')}>x</a>
-      </div>
-      
+    </div>
+
 
     );
   };
 
-  readmoreClick(e){
+  readmoreClick(e) {
     e.preventDefault();
     this.setState({
       visible: true
@@ -108,7 +109,7 @@ class News extends React.Component {
     data: React.propTypes.array.isRequired
   };
 
- 
+
   render() {
     var data = this.props.data;
     var newsTemplate
@@ -117,7 +118,7 @@ class News extends React.Component {
       newsTemplate = data.map(
         function (item, index) {
           return (
-            < div className="news__item"  key={index}>
+            < div className="news__item" key={index}>
               < Article data={item} />
             </div>
           )
@@ -139,33 +140,33 @@ class News extends React.Component {
 
   }
 
-  
+
 }
 
-class Add extends React.Component{
+class Add extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      agreeNotChecked:true,
+      agreeNotChecked: true,
       authorIsEmpty: true,
-      textIsEmpty:true,
-      
+      textIsEmpty: true,
+
     };
-    this.changeValue=this.changeValue.bind(this);
+    this.changeValue = this.changeValue.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
     this.changeCheckbox = this.changeCheckbox.bind(this);
-    
+
     this.changeAuthor = this.changeAuthor.bind(this);
     this.changeText = this.changeText.bind(this);
 
   };
 
-  changeValue(e){
-    this.setState({value: e.target.value})
+  changeValue(e) {
+    this.setState({ value: e.target.value })
   };
 
-  onBtnClick(e){
-    
+  onBtnClick(e) {
+
     e.preventDefault();
 
     var author = ReactDOM.findDOMNode(this.refs.author).value;
@@ -183,28 +184,28 @@ class Add extends React.Component{
   };
 
 
-  changeCheckbox(e){
-    
+  changeCheckbox(e) {
+
     this.setState({
       agreeNotChecked: !this.state.agreeNotChecked
     });
 
-   
+
   };
 
-  changeText(e){
+  changeText(e) {
     let text = e.target.value.trim();
-    if(text){
+    if (text) {
       this.setState({
         textIsEmpty: false
       });
-    }else{
+    } else {
       this.setState({
         textIsEmpty: true
       });
     }
-    
-    
+
+
   };
 
   changeAuthor(e) {
@@ -221,30 +222,30 @@ class Add extends React.Component{
 
   }
 
-  componentDidMount(){
+  componentDidMount() {
     ReactDOM.findDOMNode(this.refs.author).focus();
 
-    
+
   }
 
-  
 
-  
+
+
   render() {
 
     var agreeNotChecked = this.state.agreeNotChecked,
       authorIsEmpty = this.state.authorIsEmpty,
       textIsEmpty = this.state.textIsEmpty;
-    
-    return(
-      <p><input className='test-input' ref='author' defaultValue="" onChange={this.changeAuthor} placeholder="автор новости" /> <br/>
+
+    return (
+      <p><input className='test-input' ref='author' defaultValue="" onChange={this.changeAuthor} placeholder="автор новости" /> <br />
         <textarea onChange={this.changeText} ref='text' cols="30" rows="10" placeholder="текст новости" defaultValue="" ></textarea>
-      <br/>
+        <br />
         <label ><input type="checkbox" onChange={this.changeCheckbox} defaultChecked={false} name="" id="" ref='checkrule' /> Я согласен с
 правилами </label>
         <button onClick={this.onBtnClick} ref='alert_button' disabled={agreeNotChecked || authorIsEmpty || textIsEmpty}>окей </button>
       </p>
-      
+
     )
   }
 }
@@ -264,16 +265,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-  var self = this;
+    var self = this;
 
-  window.ee.addListener('News.add', function (item) {
-    var nextNews = item.concat(self.state.news);
-    self.setState({ news: nextNews });
-  });
-};
-componentWillUnmount() {
-  window.ee.removeListener('News.add');
-};
+    window.ee.addListener('News.add', function (item) {
+      var nextNews = item.concat(self.state.news);
+      self.setState({ news: nextNews });
+    });
+  };
+  componentWillUnmount() {
+    window.ee.removeListener('News.add');
+  };
 
 
   render() {
@@ -281,10 +282,10 @@ componentWillUnmount() {
       <div className="app">
         <Add />
         <h3>Новости</h3>
-        
-<News data={this.state.news} />
-        
-      </div>   
+
+        <News data={this.state.news} />
+
+      </div>
     );
   }
 

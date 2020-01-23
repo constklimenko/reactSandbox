@@ -19,13 +19,18 @@
 </head>
 
 <body>
-
+<div id="root"></div>
 
     
 
-    <main id="market-list">
+    <main id="market-list" >
         <article class="market-list">
-            <div class="market-list__title">Магазин 1000 мелочей</div>
+            <div class="market-list__title">Магазин 1000 мелочей </div>
+            <div class="market-list__search search">
+                
+                <input type="text" class="search__input">
+                <button class="search__button">Искать</button>
+            </div>
             <div class="market-list__text">Упорядочить:</div>
             <select name="filter1" id="filter1" class="market-list__filter">
                 <option value="up">по возрастанию цены</option>
@@ -47,17 +52,19 @@
             <div class="market-list__item">
                 <input type="checkbox" name="" id=""  class="market-list__item__checkbox">
                 <div class="market-list__item__title">Dinosaur
-                    <small class="market-list__item__group">animal</small>
+                    
                 </div> 
+                <small class="market-list__item__group">animal</small>
                 <div class="market-list__item__img"></div>
-                <div >
-                    <input class="market-list__item__number" type="text" class="">
-                    <div class="market-list__item__up-arrow"></div>
-                <div class="market-list__item__down-arrow"></div>
+                <div class="market-list__item__number-input  number-input" >
+                    <input class="number-input__input" type="text" class="">
+                    <span class="number-input__plus">+</span>
+                <span class="number-input__minus">-</span>
                
                 </div>
                 
                 <div class="market-list__item__cost">$1000</div>
+                <button class="market-list__item__button">в корзину</button>
                
                 
             </div>              
@@ -99,18 +106,19 @@
 
     </main>
 
+
     <script src="static/js/EventEmitter.min.js"></script>
 
 
     <script src="static/js/react/react.development.js"></script>
     <script src="static/js/react/react-dom.development.js"></script>
-    <!-- <script src="static/js/babel.min.js"></script> -->
+    <script src="static/js/babel.min.js"></script> 
 
     
 
-    <script  src="static/js/app_bundle.js"></script>
+   <!-- <script  src="static/js/app_bundle.js"></script>  -->
 
-
+    <script type="text/babel" src="../src/jsx/app.js"></script>
    
 </body>
 

@@ -2,18 +2,41 @@
 @import (reference) "parts/bootstrap";
 @import "parts/mixins";
 
+button{
+  &:extend(.btn all);
+  cursor: pointer;
+}
+
+input {
+ 
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+select{
+  &:extend(.custom-select all);
+  cursor: pointer;
+}
+
+
+
+
+
 #market-list {
   .size-full;
-  .grid(auto auto)
+  .grid(auto auto,auto, 20px);
+  padding: 20px;
 }
 
 .market-list{
   background-color: antiquewhite;
   padding: 1em;
  
-  .grid( max-content repeat(4, 1fr), 3em auto, 10px, 10px);
+  .grid(max-content repeat(4, 1fr), 3em 3em auto, 10px, 10px);
+  align-items: center;
   &__title{
     .title-h4;
+    grid-column: span 5;
     align-self: center;
     
   }
@@ -31,10 +54,12 @@
     padding: 1em;
     background-color:white;
     font-size: .9rem;
-    .grid(10% 1fr 1fr 20% );
+    .grid(10% max-content 1fr  20% );
+    align-items: center;
+    justify-items: start;
     
     &__title{
-      grid-column: span 2;
+      
       font-weight: bold;
     }
     
@@ -46,6 +71,25 @@
       grid-column-start:  4;
       background-color: @darkest;
     }
+    
+    &__button {
+      justify-self: center;
+    }
+  }
+}
+
+.number-input{
+  .grid(3em 1em 1em, 2em, 3px);
+  max-width: 100%;
+}
+
+.search{
+  align-self: stretch;
+  .flex-row;
+  align-content: center;
+  
+  &__input{
+    align-self: stretch;
   }
 }
 

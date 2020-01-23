@@ -19,7 +19,8 @@ const babel = require('gulp-babel');
 
 var config = {
     path: {
-        less: './src/less/*.less',
+        less: './react.hostronavt.ru/market_list/src/less/*.less',
+        jsx: './react.hostronavt.ru/market_list/src/jsx/*.js',
         html: './react.hostronavt.ru/market_list/index.html',
 
     },
@@ -123,13 +124,7 @@ gulp.task('babel', function () {
         .pipe(gulp.dest('static/js'))
 });
 
-gulp.task('push', function () {
-    return gulp.src(config.output.path_file).pipe(gulp.dest(config.output.newHtml));
-});
 
-gulp.task('pushCss', function () {
-    return gulp.src(config.output.path_file_css).pipe(gulp.dest(config.output.newHtml));
-})
 
 gulp.task('serve', (done) => {
     browserSync.init({
@@ -137,8 +132,12 @@ gulp.task('serve', (done) => {
             baseDir: config.output.path
         }
     });
-    gulp.watch(config.path.less, gulp.series('less')); //, 'push', 'pushCss'));
+    gulp.watch(config.path.less, gulp.series('less'));
     gulp.watch(config.path.html).on('change', () => {
+        browserSync.reload();
+        done();
+    });
+    gulp.watch(config.path.jsx).on('change', () => {
         browserSync.reload();
         done();
     });
