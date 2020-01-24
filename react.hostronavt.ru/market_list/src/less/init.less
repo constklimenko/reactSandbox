@@ -48,13 +48,17 @@ select{
     
   }
   
-  &__item{
+  &__items{
     grid-column: span 5;
+    
+  }
+  
+  &__item{
     box-shadow: 3px 3px 6px gray;
     padding: 1em;
     background-color:white;
     font-size: .9rem;
-    .grid(10% max-content 1fr  20% );
+    .grid(10% max-content 1fr  20%, auto, 10px );
     align-items: center;
     justify-items: start;
     
@@ -69,11 +73,13 @@ select{
       grid-row-start: 1;
       grid-row-end: 3;
       grid-column-start:  4;
-      background-color: @darkest;
+      width:100%;
+      height: auto;
+      
     }
     
     &__button {
-      justify-self: center;
+      justify-self: end;
     }
   }
 }

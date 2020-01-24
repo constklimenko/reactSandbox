@@ -254,27 +254,79 @@ class Add extends React.Component {
 
 let my_goods = [
   {
-    title:'',
-    cost:'',
-    imgURL:'',
-    group:'',
-    text:''
+    title: 'Dinosaur',
+    cost: '1000',
+    imgURL: '/static/img/dino.jpg',
+    group: 'animal',
+    text: ''
   },
   {
-    title:'',
-    cost:'',
-    imgURL:'',
-    group:'',
-    text:''
+    title: 'Apple',
+    cost: '10',
+    imgURL: '/static/img/apple.jpg',
+    group: 'food',
+    text: ''
   },
   {
-    title:'',
-    cost:'',
-    imgURL:'',
-    group:'',
-    text:''
+    title: 'Phone',
+    cost: '100',
+    imgURL: '/static/img/phone.jpg',
+    group: 'stuff',
+    text: ''
   },
 ]
+
+
+class MarketListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  render() {
+    var data = this.props.data;
+
+    var itemsTemplate;
+
+    if (data.length > 0) {
+      itemsTemplate = data.map(
+        function (item, index) {
+          return (
+            <div className="market-list__item" key={index}>
+              <input type="checkbox" name="" id="" className="market-list__item__checkbox"></input>
+              <div className="market-list__item__title">{item.title}
+
+              </div>
+              <small className="market-list__item__group">{item.group}</small>
+              <img className="market-list__item__img" src={item.imgURL} ></img>
+              <div className="market-list__item__number-input  number-input" >
+                <input className="number-input__input" type="text" ></input>
+                <span className="number-input__plus">+</span>
+                <span className="number-input__minus">-</span>
+
+              </div>
+
+              <div className="market-list__item__cost">${item.cost}</div>
+              <button className="market-list__item__button">в корзину</button>
+
+
+            </div >
+          );
+        }
+      )
+    } else {
+      itemsTemplate = <p>К сожалениюб товаров нет</p>
+    };
+
+
+    return (
+      <div className="market-list__items">{itemsTemplate}</div>
+
+    )
+
+
+  }
+}
 
 class MarketList extends React.Component {
 
@@ -285,106 +337,95 @@ class MarketList extends React.Component {
       goods: my_goods,
     }
 
-    this.counterPlus = this.counterPlus.bind(this)
+    // this.counterPlus = this.counterPlus.bind(this)
   }
 
-  componentDidMount() {
-    var self = this;
+  componentWillMount() {
 
-    window.ee.addListener('News.add', function (item) {
-      var nextNews = item.concat(self.state.news);
-      self.setState({ news: nextNews });
-    });
+  };
+
+  componentDidMount() {
+
+
+    // var self = this;
+
+    // window.ee.addListener('News.add', function (item) {
+    //   var nextNews = item.concat(self.state.news);
+    //   self.setState({ news: nextNews });
+    // });
   };
   componentWillUnmount() {
-    window.ee.removeListener('News.add');
+    // window.ee.removeListener('News.add');
   };
 
 
   render() {
+    var goods_list = this.state.goods;
     return (
       <main id="market-list">
         <article className="market-list">
-            <div className="market-list__title">Магазин 1000 мелочей</div>
-            <div className="market-list__search search">
-                
-                <input type="text" className="search__input"></input>
-                <button className="search__button">Искать</button>
-            </div>
-            <div className="market-list__text">Упорядочить:</div>
-            <select name="filter1" id="filter1" className="market-list__filter">
-                <option value="up">по возрастанию цены</option>
-                
-                <option value="down">по убыванию цены</option>
-                
-                <option value="alphabet">по алфавиту</option>
-            </select>
-            <div className="market-list__text">Группы товаров</div>
-            <select name="filter1" id="filter2" className="market-list__filter">
-                <option value="all">все</option>
-                
-                <option value="animals">животные</option>
-                
-                <option value="stuff">предметы</option>
-            </select>
-            
-           
-            <div className="market-list__item">
-                <input type="checkbox" name="" id=""  className="market-list__item__checkbox"></input>
-                <div className="market-list__item__title">Dinosaur
-                    
-                </div> 
-                <small className="market-list__item__group">animal</small>
-                <div className="market-list__item__img"></div>
-                <div className="market-list__item__number-input  number-input" >
-                    <input className="number-input__input" type="text" className=""></input>
-                    <span className="number-input__plus">+</span>
-                <span className="number-input__minus">-</span>
-               
-                </div>
-                
-                <div className="market-list__item__cost">$1000</div>
-                <button className="market-list__item__button">в корзину</button>
-               
-                
-            </div>              
-            
-          
-            
+          <div className="market-list__title">Магазин 1000 мелочей</div>
+          <div className="market-list__search search">
+
+            <input type="text" className="search__input"></input>
+            <button className="search__button">Искать</button>
+          </div>
+          <div className="market-list__text">Упорядочить:</div>
+          <select name="filter1" id="filter1" className="market-list__filter">
+            <option value="up">по возрастанию цены</option>
+
+            <option value="down">по убыванию цены</option>
+
+            <option value="alphabet">по алфавиту</option>
+          </select>
+          <div className="market-list__text">Группы товаров</div>
+          <select name="filter1" id="filter2" className="market-list__filter">
+            <option value="all">все</option>
+
+            <option value="animals">животные</option>
+
+            <option value="stuff">предметы</option>
+          </select>
+
+
+          < MarketListItem data={goods_list} />
+
+
+
         </article>
-        
+
         <aside className="cart">
-            <div className="cart__tab">
-                
-                    <div className="cart__tab__item">1</div>
-                    <div className="cart__tab__item">2</div>
-                    <div className="cart__tab__item">3</div>
+          <div className="cart__tab">
+
+            <div className="cart__tab__item">1</div>
+            <div className="cart__tab__item">2</div>
+            <div className="cart__tab__item">3</div>
+          </div>
+          <div className="cart__main">
+            <div className="cart__main__row">
+
             </div>
-            <div className="cart__main">
-                <div className="cart__main__row">
-                    
-                </div>
-                <div className="cart__main__row cart-row">
-                    <div className="cart-row__title">Dinosaur</div>
-                    <div className="cart-row__group">animal</div>
-                    <div className="cart-row__cost">$1000</div>
-                    <div className="cart-row__number">1</div>
-                    
-                </div>
-                <div className="cart__main__row cart-row"></div>
-                <div className="cart__main__row cart-row"></div>
+            <div className="cart__main__row cart-row">
+              <div className="cart-row__title">Dinosaur</div>
+              <div className="cart-row__group">animal</div>
+              <div className="cart-row__cost">$1000</div>
+              <div className="cart-row__number">1</div>
+
             </div>
-            
-            <div className="cart__statistics"></div>
+            <div className="cart__main__row cart-row"></div>
+            <div className="cart__main__row cart-row"></div>
+          </div>
+
+          <div className="cart__statistics"></div>
         </aside>
-        
-            
 
 
 
 
 
-    </main>
+
+
+      </main>
 
     );
   }
@@ -402,7 +443,7 @@ class MarketList extends React.Component {
 
 ReactDOM.render(
   <MarketList />,
-  document.getElementById('root')
+  document.getElementById('market-list')
 );
 
 
