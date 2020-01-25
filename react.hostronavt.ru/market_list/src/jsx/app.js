@@ -11,7 +11,7 @@ let my_goods = [
   {
     title: 'icecream',
     cost: '2',
-    imgURL: '/static/img/icecream.jpg',
+    imgURL: '/static/img/iсecream.jpg',
     group: 'food',
     text: ''
   },
@@ -99,19 +99,38 @@ class FilteringMenu extends React.Component {
 
   render() {
     return (
-      <select name="filter2" id="filter2" className="market-list__filter" onChange={this.SelectChange}>
-        <option value="all">все</option>
+      <div className="market-list__group-filter group-filter">
 
-        <option value="animal">животные</option>
+        <div className="group-filter__text">Группы товаров</div>
+        <select name="filter2" id="filter2" className="group-filter__filter" onChange={this.SelectChange}>
+          <option value="all">все</option>
 
-        <option value="stuff">предметы</option>
+          <option value="animal">животные</option>
 
-        <option value="food">еда</option>
-      </select>
+          <option value="stuff">предметы</option>
+
+          <option value="food">еда</option>
+        </select>
+      </div>
+
 
     )
   }
 
+}
+
+class SearchForm extends React.Component {
+
+
+  render() {
+    return (
+      <div className="market-list__search search">
+
+        <input type="text" className="search__input"></input>
+        <button className="search__button" onClick={this.onClick}>Искать</button>
+      </div>
+    )
+  }
 }
 
 
@@ -168,15 +187,18 @@ class SortingMenu extends React.Component {
 
   render() {
     return (
-      <select name="filter1" id="filter1" className="market-list__filter" onChange={this.SelectChange} >
-        <option value="cost_up">по возрастанию цены</option>
+      <div className="market-list__sorting sorting"><div className="sorting__text">Упорядочить:</div>
+        <select name="filter1" id="filter1" className="sorting__filter" onChange={this.SelectChange} >
+          <option value="cost_up">по возрастанию цены</option>
 
-        <option value="cost_down">по убыванию цены</option>
+          <option value="cost_down">по убыванию цены</option>
 
-        <option value="alphabetAZ">по алфавиту a - z</option>
+          <option value="alphabetAZ">по алфавиту a - z</option>
 
-        <option value="alphabetZA">по алфавиту z - a</option>
-      </select>
+          <option value="alphabetZA">по алфавиту z - a</option>
+        </select></div>
+
+
     )
   };
 
@@ -285,14 +307,12 @@ class MarketList extends React.Component {
       <main id="market-list" >
         <article className="market-list">
           <div className="market-list__title">Магазин 1000 мелочей</div>
-          <div className="market-list__search search">
+          <SearchForm />
 
-            <input type="text" className="search__input"></input>
-            <button className="search__button">Искать</button>
-          </div>
-          <div className="market-list__text">Упорядочить:</div>
+
           <SortingMenu />
-          <div className="market-list__text">Группы товаров</div>
+
+
           <FilteringMenu />
 
           < MarketListItem data={goods_list} />
