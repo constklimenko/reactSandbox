@@ -1,0 +1,58 @@
+[
+  {
+    "title": "icecream",
+    "cost": "2",
+    "imgURL": "/static/img/iсecream.jpg",
+    "group": "food",
+    "text": ""
+  },
+  {
+    "title": "dinosaur",
+    "cost": "1000",
+    "imgURL": "/static/img/dino.jpg",
+    "group": "animal",
+    "text": ""
+  },
+  {
+    "title": "cat",
+    "cost": "20",
+    "imgURL": "/static/img/cat.jpg",
+    "group": "animal",
+    "text": ""
+  },
+  {
+    "title": "rat",
+    "cost": "1",
+    "imgURL": "/static/img/rat.jpg",
+    "group": "animal",
+    "text": ""
+  },
+  {
+    "title": "car",
+    "cost": "500",
+    "imgURL": "/static/img/car.jpg",
+    "group": "stuff",
+    "text": ""
+  },
+  {
+    "title": "jar",
+    "cost": "11",
+    "imgURL": "/static/img/jar.jpg",
+    "group": "stuff",
+    "text": ""
+  },
+  {
+    "title": "apple",
+    "cost": "10",
+    "imgURL": "/static/img/apple.jpg",
+    "group": "food",
+    "text": ""
+  },
+  {
+    "title": "phone",
+    "cost": "100",
+    "imgURL": "/static/img/phone.jpg",
+    "group": "stuff",
+    "text": ""
+  }
+]

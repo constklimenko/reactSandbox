@@ -262,7 +262,7 @@ class MarketList extends React.Component {
     super(props);
     this.state = {
       counter: 0,
-      goods: my_goods,
+      goods: this.props.data,
       sorting_function: (a, b) => {
         if (a.title > b.title) {
           return 1;
@@ -279,6 +279,8 @@ class MarketList extends React.Component {
 
   componentDidMount() {
     var self = this;
+
+
     //добавляем наблюдение за событиями фильтров
     window.ee.addListener('Sorting.on', function (sortingFunction) {
       self.setState({
@@ -368,11 +370,31 @@ class MarketList extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <MarketList />,
-  document.getElementById('market-list')
-);
 
+
+fetch('static/js/market_list.json').then(function (response) {
+  if (response.ok) {
+    response.json().then(function (labels_collection) {
+
+
+
+      ReactDOM.render(
+        <MarketList data={labels_collection} />,
+        document.getElementById('market-list')
+      );
+
+    });
+  } else {
+
+
+
+    ReactDOM.render(
+      <h1>Файла с данными о товарах пока не существует.</h1>,
+      document.getElementById('market-list')
+    );
+
+  }
+});
 
 
 
