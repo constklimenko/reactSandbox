@@ -420,14 +420,21 @@ class Cart extends React.Component {
     super(props);
     this.state =
       {
-        choosen_goods: []
+        choosen_goods: [],
+
       }
   };
 
+  componentWillMount() {
+
+  }
+
   componentDidMount() {
-    self = this;
+    const self = this;
+
     window.ee.addListener('Item.push', function (item) {
-      let goods = self.state.choosen_goods;
+      console.log("before setting goods", self.state.choosen_goods)
+      var goods = self.state.choosen_goods;
 
       item.number = 1;
       if (goods.length == 0) {
@@ -436,24 +443,30 @@ class Cart extends React.Component {
         self.setState({
           choosen_goods: item2
         })
+        console.log("after first setState", self.state.choosen_goods)
       } else {
 
+        console.log("before first filter setState", self.state.choosen_goods)
+
         if (goods.filter((a) => { return a.title == item.title }).length) {
+          console.log("before first for setState", self.state.choosen_goods)
+          for (let i = 0; i < goods.length; i++) {
 
+            if (goods[i].title == item.title) {
+              console.log(" before setState", self.state.choosen_goods[0])
+              // console.log(" before++", goods[i].number)
+              goods[i].number = parseInt(goods[i].number) + 1;
+              // console.log("after++", goods[i].number)
 
-          for (let good of goods) {
-
-
-            if (good.title == item.title) {
-
-              good.number++;
+              self.setState({
+                choosen_goods: goods,
+              })
+              console.log(" after setState", self.state.choosen_goods[0])
 
             }
 
 
-            self.setState({
-              choosen_goods: goods
-            })
+
           }
 
 
@@ -465,7 +478,7 @@ class Cart extends React.Component {
           })
         }
       }
-
+      console.log("after if", self.state.choosen_goods)
 
 
 
@@ -476,8 +489,14 @@ class Cart extends React.Component {
     window.ee.removeListener('Item.push');
   };
 
+  componentDidUpdate() {
+
+  }
+
 
   render() {
+
+
     return (
       <aside className="cart">
         <div className="cart__tab v-none">
