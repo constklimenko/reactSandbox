@@ -35,6 +35,13 @@
     "text": ""
   },
   {
+    "title": "cart",
+    "cost": "300",
+    "imgURL": "/static/img/cart.jpg",
+    "group": "stuff",
+    "text": ""
+  },
+  {
     "title": "jar",
     "cost": "11",
     "imgURL": "/static/img/jar.jpg",

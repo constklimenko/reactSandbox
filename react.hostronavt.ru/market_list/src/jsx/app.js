@@ -120,14 +120,38 @@ class FilteringMenu extends React.Component {
 }
 
 class SearchForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
+      searching_value: ""
+    };
+    this.InputChange = this.InputChange.bind(this);
+    this.ButtonPush = this.ButtonPush.bind(this);
+  };
+
+  InputChange(e) {
+    this.setState({
+      searching_value: e.target.value
+    })
+  };
+
+  ButtonPush(e) {
+    const s_value = this.state.searching_value;
+    const searchingFunction = function (a) {
+      return (a.title.indexOf(s_value) != -1)
+    }
+
+    window.ee.emit('Searching.on', searchingFunction);
+
+  };
 
   render() {
     return (
       <div className="market-list__search search">
 
-        <input type="text" className="search__input"></input>
-        <button className="search__button" onClick={this.onClick}>Искать</button>
+        <input type="text" className="search__input" onChange={this.InputChange}></input>
+        <button className="search__button" onClick={this.ButtonPush}>Искать</button>
       </div>
     )
   }
@@ -142,6 +166,8 @@ class SortingMenu extends React.Component {
       sortingFunction: function (a, b) { return parseInt(b.cost) - parseInt(a.cost) },
     };
     this.SelectChange = this.SelectChange.bind(this);
+
+
   }
 
 
@@ -261,7 +287,7 @@ class MarketList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0,
+
       goods: this.props.data,
       sorting_function: (a, b) => {
         if (a.title > b.title) {
@@ -274,6 +300,7 @@ class MarketList extends React.Component {
         return 0;
       },
       filtering_function: (a) => { return true },
+      searching_function: (a) => { return true },
     }
   }
 
@@ -294,16 +321,23 @@ class MarketList extends React.Component {
       })
     })
 
+    window.ee.addListener('Searching.on', function (searchingFunction) {
+      self.setState({
+        searching_function: searchingFunction
+      })
+    })
+
 
   };
   componentWillUnmount() {
     window.ee.removeListener('Sorting.on');
     window.ee.removeListener('Filtering.on');
+    window.ee.removeListener('Searching.on');
   };
 
 
   render() {
-    let goods_list = this.state.goods.sort(this.state.sorting_function).filter(this.state.filtering_function);
+    let goods_list = this.state.goods.sort(this.state.sorting_function).filter(this.state.filtering_function).filter(this.state.searching_function);
 
     return (
       <main id="market-list" >
@@ -323,54 +357,57 @@ class MarketList extends React.Component {
 
         </article>
 
-        <aside className="cart">
-          <div className="cart__tab">
-
-            <div className="cart__tab__item">1</div>
-            <div className="cart__tab__item">2</div>
-            <div className="cart__tab__item">3</div>
-          </div>
-          <div className="cart__main">
-            <div className="cart__main__row">
-
-            </div>
-            <div className="cart__main__row cart-row">
-              <div className="cart-row__title">Dinosaur</div>
-              <div className="cart-row__group">animal</div>
-              <div className="cart-row__cost">$1000</div>
-              <div className="cart-row__number">1</div>
-
-            </div>
-            <div className="cart__main__row cart-row"></div>
-            <div className="cart__main__row cart-row"></div>
-          </div>
-
-          <div className="cart__statistics"></div>
-        </aside>
-
-
-
-
-
-
-
+        <Cart />
       </main>
 
     );
   }
 
-  counterPlus(e) {
-    e.preventDefault();
-    this.setState(
-      {
-        counter: ++this.state.counter
-      }
-    )
-
-  }
 }
 
 
+class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state =
+      {
+        choosen_goods: [],
+
+      }
+  };
+
+
+  render() {
+    return (
+      <aside className="cart">
+        <div className="cart__tab">
+
+          <div className="cart__tab__item">1</div>
+          <div className="cart__tab__item">2</div>
+          <div className="cart__tab__item">3</div>
+        </div>
+        <div className="cart__main">
+          <div className="cart__main__row">
+
+          </div>
+          <div className="cart__main__row cart-row">
+            <div className="cart-row__title">Dinosaur</div>
+            <div className="cart-row__group">animal</div>
+            <div className="cart-row__cost">$1000</div>
+            <div className="cart-row__number">1</div>
+
+          </div>
+          <div className="cart__main__row cart-row"></div>
+          <div className="cart__main__row cart-row"></div>
+        </div>
+
+        <div className="cart__statistics"></div>
+      </aside>
+    )
+  }
+}
+
+// получение данных о товарах из файла json
 
 fetch('static/js/market_list.json').then(function (response) {
   if (response.ok) {
@@ -389,7 +426,7 @@ fetch('static/js/market_list.json').then(function (response) {
 
 
     ReactDOM.render(
-      <h1>Файла с данными о товарах пока не существует.</h1>,
+      <h1>Файла с данными о товарах  не существует.</h1>,
       document.getElementById('market-list')
     );
 
