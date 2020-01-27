@@ -5,81 +5,6 @@ window.ee = new EventEmitter()
 
 // our MarketList
 
-
-// список товаров
-let my_goods = [
-  {
-    title: 'icecream',
-    cost: '2',
-    imgURL: '/static/img/iсecream.jpg',
-    group: 'food',
-    text: '',
-    number: 1,
-
-  },
-
-  {
-    title: 'dinosaur',
-    cost: '1000',
-    imgURL: '/static/img/dino.jpg',
-    group: 'animal',
-    text: '',
-    number: 1,
-  },
-
-  {
-    title: 'cat',
-    cost: '20',
-    imgURL: '/static/img/cat.jpg',
-    group: 'animal',
-    text: '',
-    number: 1,
-  },
-  {
-    title: 'rat',
-    cost: '1',
-    imgURL: '/static/img/rat.jpg',
-    group: 'animal',
-    text: '',
-    number: 1,
-  },
-
-  {
-    title: 'car',
-    cost: '500',
-    imgURL: '/static/img/car.jpg',
-    group: 'stuff',
-    text: '',
-    number: 1,
-  },
-
-  // {
-  //   title: 'jar',
-  //   cost: '11',
-  //   imgURL: '/static/img/jar.jpg',
-  //   group: 'stuff',
-  //   text: '',
-  //   number: 1,
-  // },
-  // {
-  //   title: 'apple',
-  //   cost: '10',
-  //   imgURL: '/static/img/apple.jpg',
-  //   group: 'food',
-  //   text: '',
-  //   number: 1,
-  // },
-  // {
-  //   title: 'phone',
-  //   cost: '100',
-  //   imgURL: '/static/img/phone.jpg',
-  //   group: 'stuff',
-  //   text: '',
-  //   number: 1,
-  // },
-]
-
-
 class FilteringMenu extends React.Component {
   // Выполняет фильтрацию по группе
   constructor(props) {
@@ -91,8 +16,8 @@ class FilteringMenu extends React.Component {
   }
 
   SelectChange(e) {
+    // событие отправляет фильтрующую функцию в вышележащий компонент
     if (e.target.value == "food") { this.state.filteringFunction = function (a, b) { return a.group == "food" } }
-
 
     if (e.target.value == "animal") { this.state.filteringFunction = function (a) { return a.group == "animal" } }
 
@@ -101,7 +26,7 @@ class FilteringMenu extends React.Component {
     if (e.target.value == "all") { this.state.filteringFunction = function (a) { return true } }
 
     if (e.target.value == undefined) { this.state.filteringFunction = function (a) { return true } }
-    // событие отправляет фильтрующую функцию в вышележащий компонент
+
     window.ee.emit('Filtering.on', this.state.filteringFunction);
 
   };
@@ -296,7 +221,7 @@ class MarketListItem extends React.Component {
         function (item, index) {
           return (
             <div className="market-list__item" key={index} >
-              <input type="checkbox" name="" id="" className="market-list__item__checkbox" ></input>
+              <input type="checkbox" name="" id="" className="market-list__item__checkbox v-none" ></input>
               <div className="market-list__item__title">{item.title}
 
               </div>
@@ -393,13 +318,8 @@ class MarketList extends React.Component {
         <article className="market-list">
           <div className="market-list__title">Магазин 1000 мелочей</div>
           <SearchForm />
-
-
           <SortingMenu />
-
-
           <FilteringMenu />
-
           < MarketListItem data={goods_list} />
 
 
@@ -421,91 +341,76 @@ class Cart extends React.Component {
     this.state =
       {
         choosen_goods: [],
-
       }
+
   };
-
-  componentWillMount() {
-
-  }
 
   componentDidMount() {
     const self = this;
 
     window.ee.addListener('Item.push', function (item) {
-      console.log("before setting goods", self.state.choosen_goods)
+
       var goods = self.state.choosen_goods;
 
-      item.number = 1;
+      var title = item.title;
       if (goods.length == 0) {
-
         var item2 = goods.concat(item);
+
         self.setState({
-          choosen_goods: item2
+          choosen_goods: item2,
+          [title]: 1
         })
-        console.log("after first setState", self.state.choosen_goods)
       } else {
-
-        console.log("before first filter setState", self.state.choosen_goods)
-
-        if (goods.filter((a) => { return a.title == item.title }).length) {
-          console.log("before first for setState", self.state.choosen_goods)
-          for (let i = 0; i < goods.length; i++) {
-
-            if (goods[i].title == item.title) {
-              console.log(" before setState", self.state.choosen_goods[0])
-              // console.log(" before++", goods[i].number)
-              goods[i].number = parseInt(goods[i].number) + 1;
-              // console.log("after++", goods[i].number)
-
-              self.setState({
-                choosen_goods: goods,
-              })
-              console.log(" after setState", self.state.choosen_goods[0])
-
-            }
-
-
-
-          }
-
-
-
-        } else {
+        if (!self.state[title]) {
           var item2 = goods.concat(item);
+
           self.setState({
-            choosen_goods: item2
+            choosen_goods: item2,
+            [title]: 1
           })
         }
+        else {
+          self.setState((prevState) => {
+
+            return { [title]: prevState[title] + 1 }
+          })
+
+        }
       }
-      console.log("after if", self.state.choosen_goods)
+    });
+
+    window.ee.addListener('Delete.row', function (item) {
 
 
+      var goods = self.state.choosen_goods.filter((a) => {
+        return a.title != item.title
+      });
+      self.setState((prevState) => {
 
+        return {
+
+          choosen_goods: goods,
+          [item.title]: 0
+        }
+      }
+
+      )
     })
-
   };
   componentWillUnmount() {
     window.ee.removeListener('Item.push');
+    window.ee.removeListener('Delete.row');
   };
 
-  componentDidUpdate() {
 
-  }
+
 
 
   render() {
-
-
     return (
-      <aside className="cart">
-        <div className="cart__tab v-none">
+      <aside className={(this.state.choosen_goods.length > 0) ? "cart" : "d-none"}>
 
-          <div className="cart__tab__item ">1</div>
-          <div className="cart__tab__item">2</div>
-          <div className="cart__tab__item">3</div>
-        </div>
-        <CartMain data={this.state.choosen_goods} />
+        <CartMain super_state={this.state} data={this.state.choosen_goods} />
 
         <div className="cart__statistics"></div>
       </aside>
@@ -518,15 +423,13 @@ class CartMain extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state =
-      {
+    this.state = {};
 
-
-      }
   };
 
   render() {
     var data = this.props.data;
+    self = this
 
     var itemsTemplate;
 
@@ -540,8 +443,10 @@ class CartMain extends React.Component {
               <div className="cart-row__title">{item.title}</div>
               <div className="cart-row__group">{item.group}</div>
               <div className="cart-row__cost">{item.cost}</div>
-              <div className="cart-row__number">{item.number}</div>
-              <div className="cart-row__cost">{item.number * item.cost}</div>
+              <div className="cart-row__number">{self.props.super_state[item.title]}</div>
+              <div className="cart-row__cost">{self.props.super_state[item.title] * item.cost}</div>
+
+              <CartRowClose item={item} />
 
             </div>
 
@@ -552,8 +457,37 @@ class CartMain extends React.Component {
       itemsTemplate = <p>К сожалению, товаров нет</p>
     };
 
+    // анализ сумм по группам
+
+    let summ = data.reduce((prevVal, item) => {
+      return self.props.super_state[item.title] * item.cost + prevVal;
+    }, 0)
+
+    let summ_food = data.filter((item) => { return item.group == "food" }).reduce((prevVal, item) => {
+      return self.props.super_state[item.title] * item.cost + prevVal;
+    }, 0);
+
+    let summ_stuff = data.filter((item) => { return item.group == "stuff" }).reduce((prevVal, item) => {
+      return self.props.super_state[item.title] * item.cost + prevVal;
+    }, 0);
+
+    let summ_animal = data.filter((item) => { return item.group == "animal" }).reduce((prevVal, item) => {
+      return self.props.super_state[item.title] * item.cost + prevVal;
+    }, 0);
+
+    let animal_percent = Math.floor((summ_animal * 100) / summ);
+
+    let stuff_percent = Math.floor((summ_stuff * 100) / summ);
+
+    let food_percent = Math.floor((summ_food * 100) / summ);
+
     return (
       <div className="cart__main">
+        <div className="cart__main__title">Список покупок</div>
+        <p className="cart__text" >Стоимость всех покупок: $ {summ}</p>
+        <p className="cart__text" >Еда:  {food_percent} %</p>
+        <p className="cart__text" >Животные:  {animal_percent} %</p>
+        <p className="cart__text" >Предметы:  {stuff_percent} %</p>
         <div className="cart__main__row cart-row" >
           <strong className="cart-row__title"><small>Товар</small></strong>
           <strong className="cart-row__group"><small>группа</small></strong>
@@ -562,9 +496,36 @@ class CartMain extends React.Component {
           <strong className="cart-row__cost"><small>общая стоимость</small></strong>
         </div>
 
-        {itemsTemplate}</div>
+        {itemsTemplate}
+
+
+
+      </div>
     )
   }
+}
+
+class CartRowClose extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {}
+    this.ButtonPush = this.ButtonPush.bind(this);
+  }
+
+  ButtonPush(e) {
+
+    let item = this.props.item;
+
+    window.ee.emit('Delete.row', item)
+  }
+
+  render() {
+    return (
+      <button className="cart-row__button" onClick={this.ButtonPush} >x</button>
+    )
+  }
+
 }
 
 // получение данных о товарах из файла json
